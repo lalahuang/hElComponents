@@ -1,0 +1,21 @@
+.tool-container{
+    width: 100%;
+    display:  flex;
+    justify-content: space-between;
+    align-items: center;
+    .right-tool-setting{
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgb(229,230,235);
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        img{
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        }
+    }
+}
