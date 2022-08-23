@@ -26,7 +26,7 @@
             class="line-clamp-1 column-setting-checkbox"
             :model-value="element.visiable"
             :indeterminate="false"
-            @change="(v) => propChange(v, index)"
+            @change="(v: boolean) => propChange(v, index)"
           >
             <el-tooltip
               effect="dark"
@@ -88,16 +88,19 @@ import bottomIcon from "./style/icon/bottom.png";
 import settingIcon from "./style/icon/setting.png";
 import type { ElTableColumnProps } from "./table";
 import mitt from "../../utils/mitt";
-const columns: ElTableColumnProps[] = inject("column") ?? [];
+import { WritableArray } from "element-plus/lib/utils";
+const columns: ElTableColumnProps<any>[] = inject("column") ?? [];
 const columnsList=ref(columns)
 const propChange = (v: boolean, index: number) => {
   columnsList.value[index].visiable = v;
 };
 const fixTop = (index: number) => {
+  // @ts-ignore
   columnsList.value[index].fixed = columnsList.value[index].fixed == "left" ? undefined : "left";
 
 };
 const fixDown = (index: number) => {
+  // @ts-ignore
   columnsList.value[index].fixed = columnsList.value[index].fixed == "right" ? undefined : "right";
 };
 watch(() => columnsList.value, (newValue, ) => {

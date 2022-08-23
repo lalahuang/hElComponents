@@ -1,7 +1,10 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup]
-import hTable from './packages/hTable';
+// import hTable from './packages';
+import { HTable  } from 'hcomponents';
+// import 'hcomponents/lib/style.css';
+
 import type { ElTableColumnProps } from './packages/hTable/table'
 type dataType = {
   test?: string,
@@ -11,6 +14,19 @@ type dataType = {
 type newType = dataType & {
   sah?:number
 }
+const options: DictTagOptions[] = [
+  {
+    label: "123",
+    value: "0",
+    elTagType:"primary"
+  }, 
+  {
+    label: "1234",
+    value: "1",
+    elTagType:"primary"
+  }
+  
+]
 
 const tableColumn: ElTableColumnProps<newType>[] = [
   {
@@ -20,12 +36,13 @@ const tableColumn: ElTableColumnProps<newType>[] = [
   },
   {
     label: "测试",
-    prop:""
+    prop:"test",
+    options
   },
 ]
 const data= [
   {
-    test:123
+    test:0
   }
 ]
 

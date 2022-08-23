@@ -20,7 +20,9 @@ import { defineComponent, App, PropType, createApp, ref, computed } from "vue";
 import type ElTable from "element-plus/lib/components/table";
 import type { ElTableColumn } from "element-plus/lib/components/table";
 import ToolLayout from "./tool";
+import DictTag from "../dictTag/index.vue";
 import mitt from "../../utils/mitt";
+import useDataHandle from './composition/useDataHandle';
 type ElTableType = InstanceType<typeof ElTable>;
 type ElTableProps = ElTableType["$props"];
 
@@ -30,13 +32,14 @@ type UserElTableColumnProps<T> = {
   render?: (...arg: any[]) => any;
   children?: ElTableColumnProps<T>[];
   visiable?: boolean;
-    prop?:keyof T;
+    prop?: keyof T;
+  options?:DictTagOptions[]
 };
 
 export type ElTableColumnProps<T> = InstanceType<
-    typeof ElTableColumn
+  typeof ElTableColumn
 >["$props"] &
-    UserElTableColumnProps<T> extends { prop?: keyof T | string };
+  UserElTableColumnProps<T>;
 
 export type ConditionalKeys<Base, Condition> = NonNullable<
   // Wrap in `NonNullable` to strip away the `undefined` type from the produced union.
@@ -107,6 +110,7 @@ export const hTable = defineComponent({
   },
   components: {
     ToolLayout,
+    DictTag,
   },
   provide() {
     // @ts-ignore
@@ -118,10 +122,10 @@ export const hTable = defineComponent({
     // const elTableRef = ref<ElTableType>();
     const columnList = ref(props.column);
     const key = ref(0);
-    //   监听
+    //   监听设置变化
     mitt.on("updateColumns", (val) => {
       console.log("val: ", val);
-      columnList.value = val as ElTableColumnProps[];
+      columnList.value = val as ElTableColumnProps<any>[];
       key.value = key.value + 1;
     });
 
@@ -131,10 +135,19 @@ export const hTable = defineComponent({
       const renderColumn = (columnDict: Record<string, any>, index: number) => {
         const { render, slotName, headerSlot, children, ...restAtts } =
           columnDict;
+        const { prop, columnType, options } = restAtts;
         const vSlots: {
           default?: (scope: Record<string, any>) => any;
           header?: (scope: Record<string, any>) => any;
         } = {};
+
+        useDataHandle({
+          prop,
+          vSlots,
+          columnType,
+          options,
+        });
+
         if (typeof render === "function") {
           vSlots.default = (scope) => {
             if (restAtts.prop) {
