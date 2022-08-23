@@ -1,15 +1,36 @@
 {
-  "name": "helcomponents",
-  "private": true,
+  "name": "hcomponents",
+  "private": false,
   "version": "0.0.0",
-  "type": "module",
+  "keywords": [
+    "vue3",
+    "element-plus",
+    "hcomponents",
+    "table",
+    "tag",
+    "queryWapper"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/h-components.umd.js",
+  "module": "lib/h-components.mjs",
+  "exports": {
+    
+    ".": {
+      "import": "./lib/h-components.mjs",
+      "require": "./lib/h-components.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^9.1.0",
     "element-plus": "^2.2.13",
+    "lodash": "^4.17.21",
     "mitt": "^3.0.0",
     "vue": "^3.2.37",
     "zhyswan-vuedraggable": "^4.1.3"
