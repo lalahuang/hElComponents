@@ -88,7 +88,6 @@ import bottomIcon from "./style/icon/bottom.png";
 import settingIcon from "./style/icon/setting.png";
 import type { ElTableColumnProps } from "./table";
 import mitt from "../../utils/mitt";
-import { WritableArray } from "element-plus/lib/utils";
 const columns: ElTableColumnProps<any>[] = inject("column") ?? [];
 const columnsList=ref(columns)
 const propChange = (v: boolean, index: number) => {
