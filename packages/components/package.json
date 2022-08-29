@@ -1,11 +1,20 @@
 {
-  "name": "h-components",
-  "version": "1.0.0",
+  "name": "h-components-next",
+  "version": "1.0.10",
   "description": "",
-  "main": "index.ts",
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build"
   },
+  "files": [
+    "dist/es",
+    "dist/lib"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "typings": "dist/lib/index.d.ts",
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  }
 }

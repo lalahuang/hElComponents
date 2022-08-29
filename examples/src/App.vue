@@ -1,13 +1,11 @@
 <script setup lang="ts">
 
-import HelloWorld from './components/HelloWorld.vue'
 import { Button } from 'h-components';
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-  <Button></Button>
+
+  <Button   ></Button>
 </template>
 
 <style>

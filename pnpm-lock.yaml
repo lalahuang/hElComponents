@@ -9,6 +9,7 @@ importers:
       '@vitejs/plugin-vue-jsx': ^2.0.0
       '@vueuse/core': ^9.1.0
       element-plus: ^2.2.13
+      h-components-next: workspace:^1.0.0
       lodash: ^4.17.21
       mitt: ^3.0.0
       sass: ^1.54.5
@@ -22,6 +23,7 @@ importers:
       '@h-components/utils': link:packages/utils
       '@vueuse/core': 9.1.0_vue@3.2.37
       element-plus: 2.2.13_vue@3.2.37
+      h-components-next: link:packages/components
       lodash: 4.17.21
       mitt: 3.0.0
       vue: 3.2.37

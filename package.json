@@ -24,12 +24,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "comp:build": "pnpm -C packages/components build"
   },
   "dependencies": {
-    "@h-components/utils":"workspace:*",
+    "@h-components/utils": "workspace:*",
     "@vueuse/core": "^9.1.0",
     "element-plus": "^2.2.13",
+    "h-components-next": "workspace:^1.0.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
     "vue": "^3.2.37",

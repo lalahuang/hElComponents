@@ -6,10 +6,13 @@
 
 <template>
   <div>
-    <button>测试按钮</button>
+    <button>{{ props.title }}</button>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { buttonProps } from "./types";
+const props =defineProps(buttonProps);
+</script>
 
 <style scoped></style>
