@@ -4,6 +4,11 @@
  * @Description: 
  */
 
-import Button from './button.vue';
+import Button from './src/button.vue';
 
-export default Button;
+import { withInstall  } from '@h-components/utils';
+export const HButton = withInstall(Button)
+
+export type HButtonInstance = InstanceType<typeof HButton>
+export default HButton;
+export * from './src/types'
