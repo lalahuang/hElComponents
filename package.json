@@ -25,10 +25,15 @@
     "comp:build": "pnpm -C packages/components build",
     "clean": "rimraf dist",
     "move": "node script/move.js",
-    "build": "pnpm clean && pnpm build:css && vite build && pnpm build:lib   && pnpm move",
+    "build": "pnpm clean && pnpm build:css && vite build   && pnpm publish:comp",
     "build:lib": "vite build --config vite.config.lib.ts",
     "build:css": "vite build --config vite.config.css.ts",
-    "build:theme": "vite build --config vite.config.theme.ts"
+    "publish:comp": "gulp -f script/publish/gulpfile.js",
+    "publish:utils": "gulp -f script/publishUtil/gulpfile.js",
+    "build:theme": "vite build --config vite.config.theme.ts",
+    "build:utils": "pnpm clean:utils && vite build --config vite.config.utils.ts && pnpm publish:utils",
+    "clean:utils": "rimraf distutils",
+    "move:utils": "node script/moveutils.js"
   },
   "dependencies": {
     "@h-components/utils": "workspace:*",
@@ -43,6 +48,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
+    "gulp": "^4.0.2",
     "rimraf": "^3.0.2",
     "sass": "^1.54.5",
     "typescript": "^4.6.4",

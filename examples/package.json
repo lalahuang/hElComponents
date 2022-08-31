@@ -8,6 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "h-components": "workspace:*"
+    "h-components-next": "1.0.0"
   }
 }

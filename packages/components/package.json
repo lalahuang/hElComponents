@@ -1,6 +1,6 @@
 {
   "name": "h-components-next",
-  "version": "1.0.15",
+  "version": "1.0.24",
   "type": "module",
   "description": "",
   "keywords": [
@@ -19,5 +19,8 @@
     "url": "http://www.lalahuang.cn"
   },
   "license": "ISC",
-  "typings": "index.d.ts"
+  "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@h-components/utils": "1.0.3"
+  }
 }

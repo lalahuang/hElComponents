@@ -14,7 +14,7 @@ export default (): UserConfigExport => {
       vueJsx({}),
       dts({
         entryRoot: resolve(__dirname, 'packages/components'),
-        outputDir: [resolve(__dirname, './dist/es')],
+        outputDir: [resolve(__dirname, './dist/es'), resolve(__dirname, './dist/lib')],
         cleanVueFileName:false
       }),
       vueSetupExtend(),
@@ -35,17 +35,34 @@ export default (): UserConfigExport => {
       outDir: resolve(__dirname, 'dist/es'),
       lib: {
         entry: resolve(__dirname, 'packages/components/index.ts'),
-        formats: ['es'],
-        fileName: (): string => {
-          return 'index.mjs'
-        }
+        name:"hcomponents"
       },
       rollupOptions: {
-        external: ['vue'], // 确保外部化处理那些你不想打包进库的依赖
-        output: {
-          preserveModules: true // 让打包目录和目录对应 https://rollupjs.org/guide/en/#outputpreservemodules
-        }
-      }
+
+        input: [resolve(__dirname, 'packages/components/index.ts'),],
+        external: ['vue', "@h-components/utils"], // 确保外部化处理那些你不想打包进库的依赖
+        output: [
+          {
+            format: 'es',
+            //不用打包成.es.js,这里我们想把它打包成.js
+            entryFileNames: '[name].js',
+            //让打包目录和我们目录对应
+            preserveModules: true,
+            //配置打包根目录
+            dir: resolve(__dirname, './dist/es')
+
+          },
+          {
+            format: 'cjs',
+            //不用打包成.mjs
+            entryFileNames: '[name].js',
+            //让打包目录和我们目录对应
+            preserveModules: true,
+            //配置打包根目录
+            dir: resolve(__dirname, './dist/lib')
+          }
+        ]
+      },
     }
   }
 }
