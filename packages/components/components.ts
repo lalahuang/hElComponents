@@ -5,3 +5,4 @@
  */
 
 export { default as HButton } from './button';
+export { default as HTag } from './hTag';

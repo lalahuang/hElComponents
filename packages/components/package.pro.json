@@ -8,13 +8,19 @@
     "components",
     "ui"
   ],
-  "main": "index.ts",
+  "module": "es/index",
+  "main": "lib/index",
+  "sideEffects": [
+    "dist/*",
+    "theme/*.css"
+  ],
   "author": {
     "name": "lalahuang",
     "url": "http://www.lalahuang.cn"
   },
   "license": "ISC",
+  "typings": "lib/index.d.ts",
   "dependencies": {
-    "@h-components/utils": "workspace:*"
+    "@h-components/utils": "1.0.3"
   }
 }

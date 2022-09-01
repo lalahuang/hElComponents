@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "h-components-next": "1.0.0"
+    "h-components-next": "workspace:*",
+    "@h-components/theme-chalk": "workspace:*"
   }
+  
 }

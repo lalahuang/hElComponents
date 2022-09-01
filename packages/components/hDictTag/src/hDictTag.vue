@@ -1,10 +1,15 @@
 <!--
  * @Author: hzm
+ * @Date: 2022-09-01 16:27:51
+ * @Description: 
+-->
+<!--
+ * @Author: hzm
  * @Date: 2022-08-23 10:24:27
  * @Description: 
 -->
 <template>
-  <div>
+  <div class="hDictTag">
     <template v-for="(item, index) in options">
       <template v-if="checkIsInclude(item.value)">
         <span
@@ -30,28 +35,19 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref,PropType } from 'vue';
-
-
+import { computed, defineComponent, ref } from "vue";
 export default defineComponent({
-    name:"dictTag"
-})
+  name: "dictTag",
+});
 </script>
 
 <script setup lang="ts">
-import HTag from '../hTag/index.vue';
-const props = defineProps({
-  // 数据
-  options: {
-    type: Array as PropType<DictTagOptions[]> ,
-    default: null,
-  },
-  // 当前的值
-  value: [Number, String, Array],
-});
+import HTag from "../../hTag/index";
+import { hDictTagProps } from "./types";
+const props = defineProps(hDictTagProps);
 const isEmpty = ref(false);
 let count = 0;
-function checkIsInclude(value:string|number) {
+function checkIsInclude(value: string | number) {
   if (values.value.includes(value)) {
     isEmpty.value = false;
     return true;
@@ -65,7 +61,7 @@ function checkIsInclude(value:string|number) {
 }
 
 const values = computed(() => {
-  if (props.value !== null && typeof props.value !== 'undefined') {
+  if (props.value !== null && typeof props.value !== "undefined") {
     return Array.isArray(props.value) ? props.value : [String(props.value)];
   } else {
     isEmpty.value = true;
@@ -73,9 +69,3 @@ const values = computed(() => {
   }
 });
 </script>
-
-<style scoped>
-.el-tag + .el-tag {
-  margin-left: 10px;
-}
-</style>

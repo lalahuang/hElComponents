@@ -1,12 +1,12 @@
-<script setup lang="ts">
-
-import { Button } from 'h-components';
-</script>
-
 <template>
 
-  <Button   ></Button>
+<h-tag content="ceshi" type="primary"></h-tag>
+
 </template>
+
+<script setup lang="ts">
+import { HTag  } from 'h-components-next';
+</script>
 
 <style>
 #app {

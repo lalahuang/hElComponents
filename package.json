@@ -25,7 +25,7 @@
     "comp:build": "pnpm -C packages/components build",
     "clean": "rimraf dist",
     "move": "node script/move.js",
-    "build": "pnpm clean && pnpm build:css && vite build   && pnpm publish:comp",
+    "build": "pnpm clean && pnpm build:css && build:theme && vite build   && pnpm publish:comp",
     "build:lib": "vite build --config vite.config.lib.ts",
     "build:css": "vite build --config vite.config.css.ts",
     "publish:comp": "gulp -f script/publish/gulpfile.js",

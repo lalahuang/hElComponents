@@ -40,7 +40,7 @@ export default (): UserConfigExport => {
       rollupOptions: {
 
         input: [resolve(__dirname, 'packages/components/index.ts'),],
-        external: ['vue', "@h-components/utils"], // 确保外部化处理那些你不想打包进库的依赖
+        external: ['vue', "@h-components/utils","element-plus"], // 确保外部化处理那些你不想打包进库的依赖
         output: [
           {
             format: 'es',
