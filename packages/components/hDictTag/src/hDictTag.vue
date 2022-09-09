@@ -10,26 +10,34 @@
 -->
 <template>
   <div class="hDictTag">
-    <template v-for="(item, index) in options">
-      <template v-if="checkIsInclude(item.value)">
-        <span
-          v-if="item.elTagType == 'default' || item.elTagType == ''"
-          :key="item.value"
-          :index="index"
-          :class="item.elTagType"
-          >{{ item.label }}</span
-        >
-        <h-tag
-          v-else
-          :key="item.value + ''"
-          :disable-transitions="true"
-          :index="index"
-          :content="item.label"
-          :type="item.elTagType"
-          :class="item.elTagType"
-        ></h-tag>
+    <el-space wrap :direction="direction">
+      <template v-for="(item, index) in options">
+        <template v-if="checkIsInclude(item.value)">
+          <span
+            v-if="item.dictType == 'text'"
+            :key="item.value"
+            :index="index"
+            :class="item.elTagType"
+            >{{ item.label }}</span
+          >
+          <h-tag
+            v-else-if="item.dictType == 'hTag'"
+            :key="item.value + ''"
+            :content="item.label"
+            :type="item.elTagType"
+          ></h-tag>
+          <el-tag
+            v-else-if="item.dictType == 'elTag'"
+            :disable-transitions="true"
+            :index="index"
+            :type="item.elTagType == 'primary' ? void 0 : item.elTagType"
+            :class="item.elTagType"
+          >
+            {{ item.label }}
+          </el-tag>
+        </template>
       </template>
-    </template>
+    </el-space>
     <!-- 都不存在显示- -->
     <span v-if="isEmpty">-</span>
   </div>
@@ -37,7 +45,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 export default defineComponent({
-  name: "dictTag",
+  name: "HDictTag",
 });
 </script>
 

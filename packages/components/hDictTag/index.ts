@@ -1,14 +1,13 @@
-
 /*
  * @Author: hzm
  * @Date: 2022-08-23 10:17:52
- * @Description: 
+ * @Description:
  */
-import { createApp } from 'vue';
-import dictTag from './index.vue';
-function install(app: ReturnType<typeof createApp>, options = {}) {
-    app.component(dictTag.name, dictTag);
-}
-dictTag.install = install
+import hDictTag from "./src/hDictTag.vue";
 
-export default dictTag
+import { withInstall } from "@h-components/utils";
+export const HDictTag = withInstall(hDictTag);
+
+export type HDictTagInstance = InstanceType<typeof HDictTag>;
+export default HDictTag;
+export * from "./src/types";
