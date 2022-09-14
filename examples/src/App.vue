@@ -5,10 +5,11 @@
     direction="vertical"
     :value="['0', '1']"
   ></h-dict-tag>
+  <h-form></h-form>
 </template>
 
 <script setup lang="ts">
-import { HTag, HDictTag } from "h-components-next";
+import { HTag, HDictTag, HForm } from "h-components-next";
 import type { DictTagOptions } from "h-components-next/hDictTag";
 
 const dictTagsOptions: DictTagOptions[] = [
