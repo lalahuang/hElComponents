@@ -4,6 +4,7 @@
  * @Description:
  */
 import { get } from "lodash";
+import { DictTagOptions } from "packages/components/hDictTag/src/types";
 
 export default function useDataHandle({
   prop,

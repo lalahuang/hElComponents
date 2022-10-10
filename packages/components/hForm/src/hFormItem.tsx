@@ -1,15 +1,14 @@
 /*
  * @Author: hzm
- * @Date: 2022-09-14 16:37:23
+ * @Date: 2022-09-15 16:32:51
  * @Description:
  */
-
 import { defineComponent } from "vue";
 import { hFormProps } from "./types";
 export default defineComponent({
-  name: "HForm",
+  name: "HFormItem",
   props: hFormProps,
   setup(props, { attrs, slots }) {
-    return () => <div>123</div>;
+    return () => <div>formIten</div>;
   },
 });

@@ -23,6 +23,7 @@ import ToolLayout from "./tool";
 import DictTag from "../dictTag/index.vue";
 import mitt from "../../utils/mitt";
 import useDataHandle from './composition/useDataHandle';
+import { DictTagOptions } from "../hDictTag/src/types";
 type ElTableType = InstanceType<typeof ElTable>;
 type ElTableProps = ElTableType["$props"];
 
@@ -32,8 +33,8 @@ type UserElTableColumnProps<T> = {
   render?: (...arg: any[]) => any;
   children?: ElTableColumnProps<T>[];
   visiable?: boolean;
-    prop?: keyof T;
-  options?:DictTagOptions[]
+  prop?: keyof T;
+  options?: DictTagOptions[];
 };
 
 export type ElTableColumnProps<T> = InstanceType<

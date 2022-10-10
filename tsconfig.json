@@ -13,7 +13,7 @@
     "lib": ["dom", "esnext"],
     "skipLibCheck": true,
     "baseUrl": ".",
-    "typeRoots": ["node_modules/@types", "@types"]
+    "typeRoots": ["node_modules/@types", "types"]
   },
   "include": [
     "packages/**/*.ts",
@@ -22,6 +22,6 @@
     "examples/**/*.ts",
     "examples/**/*.d.ts",
     "examples/**/*.tsx",
-    "@types/**/*.d.ts"
+    "types/**/*.d.ts"
   ]
 }

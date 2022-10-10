@@ -37,7 +37,7 @@ const columns=ref(
             prop:"test",//form-item prop属性
             component:"el-input",
             componentProps:{//自动支持 component 属性
-
+                
             },
 
         }
