@@ -13,8 +13,6 @@
     "name": "lalahuang",
     "url": "http://www.lalahuang.cn"
   },
-  "license": "ISC",
-  "dependencies": {
-    "@h-components/utils": "workspace:*"
-  }
+  "license": "ISC"
+  
 }

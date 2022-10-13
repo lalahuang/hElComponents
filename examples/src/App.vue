@@ -1,18 +1,23 @@
 <template>
-  <h-tag content="ceshi" type="primary"></h-tag>
+  <h-tag  content="ceshi" type="primary"></h-tag>
   <h-dict-tag
+    
     :options="dictTagsOptions"
     direction="vertical"
     :value="['0', '1']"
+    
   ></h-dict-tag>
-  <h-form></h-form>
+  <h-form ></h-form>
+<h-table></h-table>
+<HMorebox></HMorebox>
 </template>
 
 <script setup lang="ts">
-import { HTag, HDictTag, HForm } from "h-components-next";
-import type { DictTagOptions } from "h-components-next/hDictTag";
-
-const dictTagsOptions: DictTagOptions[] = [
+import { HTag, HDictTag, HForm, } from "h-components-next";
+import  { DictTagOptions } from "h-components-next/hDictTag";
+import HTable from './components/table.vue';
+import HMorebox from './components/hmorebox.vue';
+const dictTagsOptions: DictTagOptions = [
   {
     label: "测试字典",
     value: "0",

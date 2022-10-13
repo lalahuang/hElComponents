@@ -29,6 +29,7 @@
 const columns=[ 
     {
         ...el-table 自带属性,
+        prop:"",//键
         slotName:"",//通过slot的方式渲染 与具名插槽的命名相同
         
 

@@ -10,19 +10,21 @@ import type ElSpace from "element-plus/lib/components/space";
 import { ExtractPropTypes, PropType } from "vue";
 export type ElBadgeType = InstanceType<typeof ElBadge>;
 export type ElSpaceType = InstanceType<typeof ElSpace>;
-export type DictTagOptions = {
+export type DictTagOption = {
   label: string;
   value: string | number;
-  dictType: DictType;
-  elTagType: ElBadgeType["$props"]["type"];
+  dictType?: DictType;
+  elTagType?: ElBadgeType["$props"]["type"];
 };
+
+export type DictTagOptions = Array<DictTagOption>;
 
 export type DictType = "hTag" | "elTag" | "text";
 
 export const hDictTagProps = {
   // 数据
   options: {
-    type: Array as PropType<DictTagOptions[]>,
+    type: Array as PropType<DictTagOptions>,
     default: null,
   },
   // 当前的值

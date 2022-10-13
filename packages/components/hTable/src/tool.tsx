@@ -5,8 +5,7 @@
  */
 
 import { defineComponent, PropType } from "vue";
-import type { ElTableColumnProps } from "./table";
-import "./style/tool.scss";
+
 import setting from "./setting.vue";
 
 export default defineComponent({

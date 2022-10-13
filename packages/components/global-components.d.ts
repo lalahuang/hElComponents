@@ -6,8 +6,8 @@
 import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
     export interface GlobalComponents {
-        HButton: typeof import('./button')['HButton']
         HTag: typeof import('./hTag')['HTag']
+        HTable: typeof import('./hTable')['HTable']
     }
 }
 

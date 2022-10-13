@@ -3,8 +3,10 @@
  * @Date: 2022-08-23 09:35:39
  * @Description:
  */
+import { getFirstImage } from "@/components/utils";
+import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import { get } from "lodash";
-import { DictTagOptions } from "packages/components/hDictTag/src/types";
+import { ColumnTypeOptions,columnType } from '../types';
 
 export default function useDataHandle({
   prop,
@@ -12,19 +14,33 @@ export default function useDataHandle({
   columnType,
   options,
 }: {
-  prop: string;
+  prop?: string;
   vSlots: {
-    default?: (scope: Record<string, any>) => any;
-    header?: (scope: Record<string, any>) => any;
+    default?: ({
+      row,
+      column,
+      $index,
+    }: {
+      row: any;
+      column: TableColumnCtx<any>;
+      $index: number;
+    }) => any;
+    header?: ({
+      column,
+      $index,
+    }: {
+      column: TableColumnCtx<any>;
+      $index: number;
+    }) => any;
   };
-  columnType?: "image";
-  options: DictTagOptions[];
+  columnType?: columnType;
+  options?: ColumnTypeOptions;
 }) {
   // 空数据处理
   if (prop) {
     vSlots.default = (scope) => {
       const data = get(scope.row, prop);
-      return data ? <span>data </span> : <  >-</  >;
+      return data ? <span>{data}</span> : <>-</>;
     };
   }
   // 图片处理
@@ -45,17 +61,10 @@ export default function useDataHandle({
     };
   }
   // 选项
-  if (prop && options) {
+  if (prop && columnType == "dict") {
     vSlots.default = (scope) => {
       const data = get(scope.row, prop);
-      return <dict-tag options={options} value={data}></dict-tag>;
+      return <dict-tag options={options?.list ?? []} value={data}></dict-tag>;
     };
-  }
-
-  function getFirstImage(str: string, delimiter = ",") {
-    if (str) {
-      return str.split(delimiter)?.[0] ?? "";
-    }
-    return "";
   }
 }

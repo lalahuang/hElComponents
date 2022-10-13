@@ -36,7 +36,7 @@
     "move:utils": "node script/moveutils.js"
   },
   "dependencies": {
-    "@h-components/utils": "workspace:*",
+    "@element-plus/icons-vue": "^2.0.10",
     "@vueuse/core": "^9.1.0",
     "element-plus": "^2.2.13",
     "h-components-next": "workspace:^1.0.0",
@@ -51,7 +51,7 @@
     "gulp": "^4.0.2",
     "rimraf": "^3.0.2",
     "sass": "^1.54.5",
-    "typescript": "^4.6.4",
+    "typescript": "^4.8.4",
     "unplugin-vue-components": "^0.22.4",
     "unplugin-vue-setup-extend-plus": "^0.3.2",
     "vite": "^3.0.7",

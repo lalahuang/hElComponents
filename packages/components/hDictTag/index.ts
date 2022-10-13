@@ -5,7 +5,7 @@
  */
 import hDictTag from "./src/hDictTag.vue";
 
-import { withInstall } from "@h-components/utils";
+import { withInstall } from "../utils";
 export const HDictTag = withInstall(hDictTag);
 
 export type HDictTagInstance = InstanceType<typeof HDictTag>;

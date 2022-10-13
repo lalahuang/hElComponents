@@ -4,14 +4,14 @@
  * @Description: 
  */
 
-import {  createApp } from 'vue';
-import { hTable }  from './table';
-function install(app: ReturnType<typeof createApp>, options = {}) {
-    app.component(hTable.name, hTable);
-}
-hTable.install = install
+import hTable from "./src/table";
 
-export default hTable
+import { withInstall } from "../utils";
+export const HTable = withInstall(hTable);
+export type HTableInstance = InstanceType<typeof HTable>;
+export default HTable;
+export * from "./src/types";
+export * from "./src/props";
 
 
 

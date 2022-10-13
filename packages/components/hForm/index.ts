@@ -6,7 +6,7 @@
 
 import hFrom from "./src/hFrom";
 
-import { withInstall } from "@h-components/utils";
+import { withInstall } from "@comp/utils";
 export const HForm = withInstall(hFrom);
 
 export type HFormInstance = InstanceType<typeof HForm>;

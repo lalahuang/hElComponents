@@ -53,10 +53,13 @@ export default defineComponent({
 import HTag from "../../hTag/index";
 import { hDictTagProps } from "./types";
 const props = defineProps(hDictTagProps);
+console.log('props: ', props);
 const isEmpty = ref(false);
 let count = 0;
 function checkIsInclude(value: string | number) {
-  if (values.value.includes(value)) {
+
+  if (values.value.includes(String(value))) {
+    
     isEmpty.value = false;
     return true;
   } else {
@@ -66,10 +69,12 @@ function checkIsInclude(value: string | number) {
     }
     return false;
   }
+  
 }
 
 const values = computed(() => {
   if (props.value !== null && typeof props.value !== "undefined") {
+    
     return Array.isArray(props.value) ? props.value : [String(props.value)];
   } else {
     isEmpty.value = true;

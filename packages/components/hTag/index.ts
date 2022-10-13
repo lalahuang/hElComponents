@@ -5,7 +5,7 @@
  */
 import hTag from './src/hTag';
 
-import { withInstall } from '@h-components/utils';
+import { withInstall } from '../utils';
 export const HTag = withInstall(hTag)
 
 export type HTagInstance = InstanceType<typeof HTag>
