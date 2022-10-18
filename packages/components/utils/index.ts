@@ -7,3 +7,4 @@
 export * from './install'
 export * from './mitt'
 export * from './common'
+export * from './modal'

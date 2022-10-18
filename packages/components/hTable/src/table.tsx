@@ -26,6 +26,7 @@ import { tableProps } from "./props";
 import { ITableColumns, ITableExpose, TableColumn } from "./types";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import useHeaderTootip from './composition/useHeaderTootip';
+import { get } from "lodash";
 
 export default defineComponent({
   name: "HTbale",
@@ -58,7 +59,7 @@ export default defineComponent({
       const renderColumn = (columnDict: TableColumn, index: number) => {
         const { render, slotName, headerSlotName, children, ...restAtts } =
           columnDict;
-        const { prop, columnType, options,headerDescription } = restAtts;
+        const { prop, columnType, options, headerDescription } = restAtts;
         const vSlots: {
           default?: ({
             row,
@@ -70,7 +71,6 @@ export default defineComponent({
             $index: number;
           }) => any;
           header?: ({
-           
             column,
             $index,
           }: {
@@ -79,13 +79,13 @@ export default defineComponent({
           }) => any;
         } = {};
 
-        useDataHandle({
-          prop,
-          vSlots,
-          columnType,
-          options,
-        });
-
+        // 空数据处理
+        if (prop) {
+          vSlots.default = (scope) => {
+            const data = get(scope.row, prop);
+            return data ? <span>{data}</span> : <>-</>;
+          };
+        }
         if (typeof render === "function") {
           vSlots.default = (scope) => {
             if (restAtts.prop) {
@@ -98,21 +98,30 @@ export default defineComponent({
         if (slotName && typeof slots[slotName] === "function") {
           vSlots.default = (scope) =>
             (slots[slotName] as (scope: any) => {})(scope);
+        } 
+        /** 复杂组件渲染 */
+        if (columnType) {
+          useDataHandle({
+            prop,
+            vSlots,
+            columnType,
+            options,
+          });
         }
+
+        /**header slot */
 
         if (headerSlotName && slots[headerSlotName]) {
           vSlots.header = (scope) =>
             (slots[headerSlotName] as (scope: any) => {})(scope);
-        } else if(headerDescription){ 
-          vSlots.header = (scope) =>
-            useHeaderTootip(scope,headerDescription);
-        };
-
-
+        } else if (headerDescription) {
+          /** 头部描述 */
+          vSlots.header = (scope) => useHeaderTootip(scope, headerDescription);
+        }
 
         if (children?.length ?? 0 > 0) {
           vSlots.default = (scope) => {
-            return children?.map(renderColumn)??[];
+            return children?.map(renderColumn) ?? [];
           };
         }
 
@@ -128,7 +137,7 @@ export default defineComponent({
       const columnsSlots = columnList?.value?.map(renderColumn)??[];
       console.log('columnsSlots: ', columnsSlots);
       return (
-        <div>
+        <div class="h-table">
           <tool-layout
             v-slots={{
               leftHandleArea: () => {

@@ -1,65 +1,85 @@
-.column-image{
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-}
 
-.tool-container{
-    width: 100%;
-    display:  flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    .right-tool-setting{
+
+
+
+
+
+.h-table{
+
+  .h-table__tool-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+  
+      .right-tool-setting {
         width: 30px;
         height: 30px;
-        border: 1px solid rgb(229,230,235);
+        border: 1px solid rgb(229, 230, 235);
         border-radius: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        img{
-        width: 15px;
-        height: 15px;
-        display: inline-block;
+  
+        img {
+          width: 15px;
+          height: 15px;
+          display: inline-block;
         }
+      }
     }
-}
 
-.tableToolPopover {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-
-.column-setting-container {
-  cursor: move;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 8px;
-
-  &:hover {
-    background: #409eff;
-    .column-setting-top-bottom {
-      display: flex;
+  &__column-image {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
     }
-  }
-  .column-setting-checkbox.el-checkbox {
-    margin-left: 24px;
-    width: 200px;
-    overflow: hidden;
-  }
-  .column-setting-top-bottom {
-    display: none;
-    align-items: center;
-  }
-}
-
-.h-table-header_tooltip{
+  .h-table-header_tooltip{
   display: inline-flex;
   align-items: center;
   i{
     margin-left: 4px;
   }
 }
+}
+
+    .h-table__setting-popover {
+  
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+  
+    }
+  
+    .h-table__setting-inner {
+      
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+        transition: all .3s ease-in-out;
+        .sort-handel{
+          cursor: move;
+          .el-icon{
+            display: flex;
+          }
+        }
+      &:hover {
+        background: var(--el-color-primary-light-8);
+        .column-setting-top-bottom {
+          display: flex;
+        }
+      }
+  
+      .column-setting-checkbox.el-checkbox {
+        margin-left: 24px;
+        width: 200px;
+        overflow: hidden;
+      }
+  
+      .column-setting-top-bottom {
+        display: none;
+        align-items: center;
+      }
+    }

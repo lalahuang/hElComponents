@@ -27,7 +27,7 @@ export default defineComponent({
         handleArea = slots.handleArea();
       }
       return (
-        <div class="tool-container">
+        <div class="h-table__tool-container">
           <div class="left-tool-container">{leftHandleArea}</div>
           <div class="right-tool-container">
             {handleArea}

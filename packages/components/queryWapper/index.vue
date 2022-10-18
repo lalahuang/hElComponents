@@ -58,7 +58,6 @@ const CONFIG_SPAN_BREAKPOINTS:{[key in string ]:number}  = {
 /** 配置表单列变化的容器宽度断点 */
 const BREAKPOINTS = {
   vertical: [
-    // [breakpoint, cols, layout]
     [513, 1, 'vertical'],
     [785, 2, 'vertical'],
     [1057, 3, 'vertical'],

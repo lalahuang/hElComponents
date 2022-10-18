@@ -10,7 +10,6 @@ import { QuestionFilled } from "@element-plus/icons-vue";
 export default function useHeaderTootip(
   {
     column,
-    
     $index,
   }: {
     column: TableColumnCtx<any>;
@@ -18,7 +17,6 @@ export default function useHeaderTootip(
   },
   headerDescription:string
 ) {
-console.log("column: ", column);
     return (
       <div class="h-table-header_tooltip">
         {column.label}

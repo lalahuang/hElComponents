@@ -4,42 +4,61 @@
  * @Description: 
  */
 
-import { defineComponent } from "vue";
-import { ArrowDown  } from "@element-plus/icons-vue";
+import { defineComponent, VNode } from 'vue';
+import { ArrowDown } from "@element-plus/icons-vue";
 import { hMoreBoxProps } from './props';
 export default defineComponent({
   name: "HMoreBox",
   props: hMoreBoxProps,
     setup(props, { attrs, slots }) {
       /**获取元素 */
+      const vslots = slots?.default?.() ?? [];
+      const defaultNumber = props.showNumber || 2;
+      let defaultList: VNode[] = [];
+      /**收缩个数 */
+      let contractionList: VNode[] = [];
+      
+      if (vslots?.length && vslots.length > defaultNumber) {
+          defaultList = vslots.slice(0, defaultNumber);
+          contractionList = vslots.slice(defaultNumber);
+      } else {
+        defaultList = vslots;
+      }
+      console.log("defaultList: ", defaultList);
 
-    return () => (
-      <el-dropdown
-        v-slots={{
-          dropdown: () => (
-            <el-dropdown-menu>
-              <el-dropdown-item>
-                <el-link type="primary" href="" target="_blank">
-                  123
-                </el-link>
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <el-button type="primary" size="default">
-                  按钮
-                </el-button>
-              </el-dropdown-item>
-              <el-dropdown-item>Action 3</el-dropdown-item>
-            </el-dropdown-menu>
-          ),
-        }}
-      >
-        <span class="el-dropdown-link">
-          Dropdown List
-          <el-icon class="el-icon--right">
-            <ArrowDown />
-          </el-icon>
-        </span>
-      </el-dropdown>
-    );
-  },
+      console.log("contractionList: ", contractionList);
+      /** 渲染<el-dropdown-item>子项 */
+      const dropdownItemList = contractionList.length
+        ? contractionList.map((comp) => {
+            return <el-dropdown-item>{comp}</el-dropdown-item>;
+          })
+        : [];
+
+      return () => (
+        <div class='h-more-box'>
+          <el-space>
+            {defaultList}
+            {dropdownItemList.length ? (
+              <el-dropdown
+                v-slots={{
+                  dropdown: () => (
+                    <el-dropdown-menu>{dropdownItemList}</el-dropdown-menu>
+                  ),
+                }}
+              >
+                <div
+                  class="h-more-box_text"
+                  style={`color:var(--el-color-primary)`}
+                >
+                  <el-link type="primary" underline={false} >更多</el-link>
+                  <el-icon  style={`color:var(--el-color-primary)`} >
+                    <ArrowDown />
+                  </el-icon>
+                </div>
+              </el-dropdown>
+            ) : null}
+          </el-space>
+        </div>
+      );
+    },
 });

@@ -28,6 +28,14 @@
                 <el-button type="primary" size="default" @click="">测试按钮</el-button>
                 <el-button type="primary" size="default" @click="">测试按钮2</el-button>
             </template>
+            <template #menuList>
+                <el-link type="primary" target="_blank">测试按钮1</el-link>
+                <el-link type="danger" target="_blank">测试按钮2</el-link>
+                <el-link type="warning" target="_blank">测试按钮3</el-link>
+                <el-link type="info" target="_blank">测试按钮4</el-link>
+                <el-link type="success" target="_blank">测试按钮5</el-link>
+                <el-link type="success" target="_blank">测试按钮6</el-link>
+            </template>
         </HTable>
         <!-- <ProTable></ProTable> -->
             
@@ -35,7 +43,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { HTable } from "h-components-next";
 import { defineTableColumns } from "h-components-next/hTable";
 
@@ -77,6 +85,7 @@ const columns = defineTableColumns<DataType>(
         {
             label:"时间",
             prop: "date",
+            align: "left"
         },
         {
             label: "测试slotName",
@@ -99,8 +108,8 @@ const columns = defineTableColumns<DataType>(
         {
             label: "测试render与slot优先级",
             prop:"title",
-            render: ({ column, $index }, data) => {
-                console.log('{ column, $index }, data: ', { column, $index }, data);
+            render: ({ row,column, $index }, data) => {
+                console.log('{ column, $index }, data: ', { column, $index }, data,);
                 return "render优先级高";
             },
             slotName:"testRenderSlot"
@@ -154,11 +163,24 @@ const columns = defineTableColumns<DataType>(
             prop: "compxObj.obj",
             headerDescription:"这是测试表格描述"
         },
+        {
+            label: "操作",
+            columnType: "menu",
+            width: "250px",
+            slotName:"menuList",
+            render: () => (
+                <>
+                    <el-link type="primary" target="_blank" > 测试按钮1 </el-link>
+                    <el-link type="primary" target="_blank" > 测试按钮1 </el-link>
+                    <el-link type="primary" target="_blank" > 测试按钮1 </el-link>
+                    <el-link type="primary" target="_blank" > 测试按钮1 </el-link>
+                    <el-link type="primary" target="_blank" > 测试按钮1 </el-link>
+                </>
+            )
+        }
     ]
 )
     console.log('columns: ', columns);
-
-
 </script>
 
 <style scoped>

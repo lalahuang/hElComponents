@@ -32,7 +32,7 @@ export interface TableColumnsProps {
 }
 
 export interface TableCommonColumn<T = ExternalParam> extends TableColumnsProps {
-  type?: "selection" | "index" | "expand";
+  type?: "selection" | "index" | "expand" ;
   /** column label */
   label?: string;
   /** column width */
@@ -80,7 +80,8 @@ export interface ColumnTypeOptions {
   /** 数据列表 */
   list?: DictTagOption[];
 }
-export type columnType = "dict" | "image";
+export type columnType = "dict" | "image" | "menu" | "copy";
+
 
 /** Table Column Options */
 export interface TableColumn<T = ExternalParam> extends TableCommonColumn<T> {
