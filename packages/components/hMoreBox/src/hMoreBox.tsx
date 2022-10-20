@@ -13,7 +13,7 @@ export default defineComponent({
     setup(props, { attrs, slots }) {
       /**获取元素 */
       const vslots = slots?.default?.() ?? [];
-      const defaultNumber = props.showNumber || 2;
+      const defaultNumber = props.showNumber || 3;
       let defaultList: VNode[] = [];
       /**收缩个数 */
       let contractionList: VNode[] = [];

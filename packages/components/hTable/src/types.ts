@@ -18,7 +18,6 @@ import type {
 } from "../../commonTypes";
 import type { DictTagOption } from "../../hDictTag";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
-import { ExternalParam } from '../../commonTypes';
 
 
 /** Table Column Options for pro-table */
@@ -32,7 +31,7 @@ export interface TableColumnsProps {
 }
 
 export interface TableCommonColumn<T = ExternalParam> extends TableColumnsProps {
-  type?: "selection" | "index" | "expand" ;
+  type?: "selection" | "index" | "expand";
   /** column label */
   label?: string;
   /** column width */
@@ -74,6 +73,8 @@ export interface TableCommonColumn<T = ExternalParam> extends TableColumnsProps 
   /** whether to reserve selection after data refreshing. Note that row-key is required for this to work */
   reserveSelection?: boolean;
   index?: number | ((index: number) => number | string);
+  /**表头 */
+  fixHeader?: FixHeader;
 }
 /** 组件选项 */
 export interface ColumnTypeOptions {
@@ -93,7 +94,11 @@ export interface TableColumn<T = ExternalParam> extends TableCommonColumn<T> {
   hide?: boolean;
   /** render函数支持h()写法以及 tsx写法 */
   render?: (
-    { row, column, $index }: { row: T; column: TableColumnCtx<T>; $index: number },
+    {
+      row,
+      column,
+      $index,
+    }: { row: T; column: TableColumnCtx<T>; $index: number },
     value?: any
   ) => string | MaybeArray<VNode>;
   columnType?: columnType;
@@ -105,6 +110,7 @@ export interface TableColumn<T = ExternalParam> extends TableCommonColumn<T> {
   options?: ColumnTypeOptions;
   /** 表头描述 */
   headerDescription?: string;
+  
 }
 
 /** Table Columns Options */
@@ -137,6 +143,9 @@ export interface ITableExpose<T = ExternalParam> {
 export type ITableProps = IDefineProps<typeof tableProps>;
 export type ITableEmits = IDefineEmits<typeof tableEmits>;
 
+
+
+
 /**
  * Type helper to make it easier to define columns
  * @param columns the columns of Table
@@ -145,6 +154,13 @@ export function defineTableColumns<T = ExternalParam>(
   columns: ITableColumns<T>
 ): ITableColumns<T> {
   return columns;
+}
+
+/** 表头 */
+
+export type FixHeader = {
+  top: number;
+  scrollContainer?:string 
 }
 
 

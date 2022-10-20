@@ -16,35 +16,39 @@
  *
  */
 
-import { defineComponent, App, PropType, createApp, ref, computed } from "vue";
+import { defineComponent, App, PropType, createApp, ref, computed,onMounted,nextTick } from "vue";
 
 import ToolLayout from "./tool";
 import DictTag from "@comp/hDictTag/src/hDictTag.vue";
 import { emitter } from "../../utils";
 import useDataHandle from './composition/useDataHandle';
-import { tableProps } from "./props";
-import { ITableColumns, ITableExpose, TableColumn } from "./types";
+import { tableProps, paginationKeys,tableEmits } from './props';
+import { FixHeader, ITableColumns, ITableExpose, TableColumn } from "./types";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import useHeaderTootip from './composition/useHeaderTootip';
 import { get } from "lodash";
-
+import { reactivePick  } from '@vueuse/core';
+import { mergeProps  } from 'vue';
+import { usePagination } from "./composition/usePagination";
+import useFixHeader from './composition/useFixHeader';
+import { isDefined  } from '@vueuse/core';
 export default defineComponent({
   name: "HTbale",
   props: tableProps,
   components: {
     ToolLayout,
-    DictTag,
   },
+  emits: tableEmits,
   provide() {
     // @ts-ignore
     return {
       column: this.columns,
     };
   },
-  setup(props, { attrs, slots }) {
+  setup(props, { attrs, slots, emit }) {
     // const elTableRef = ref<ElTableType>();
     const columnList = ref(props.columns);
-    console.log('columnList: ', columnList);
+    console.log("columnList: ", columnList);
     const key = ref(0);
     //   监听设置变化
     emitter.on("updateColumns", (val) => {
@@ -52,11 +56,17 @@ export default defineComponent({
       columnList.value = val as ITableColumns<any>;
       key.value = key.value + 1;
     });
+    // 设置pagination props
+    const paginationProps = reactivePick(props, ...paginationKeys);
+    const { currentChange, sizeChange } = usePagination(emit);
 
     return () => {
       // @ts-ignore
       const { data, columns, align } = props;
       const renderColumn = (columnDict: TableColumn, index: number) => {
+        if (columnDict.hide) {
+          return;
+        }
         const { render, slotName, headerSlotName, children, ...restAtts } =
           columnDict;
         const { prop, columnType, options, headerDescription } = restAtts;
@@ -98,7 +108,7 @@ export default defineComponent({
         if (slotName && typeof slots[slotName] === "function") {
           vSlots.default = (scope) =>
             (slots[slotName] as (scope: any) => {})(scope);
-        } 
+        }
         /** 复杂组件渲染 */
         if (columnType) {
           useDataHandle({
@@ -134,10 +144,10 @@ export default defineComponent({
           />
         );
       };
-      const columnsSlots = columnList?.value?.map(renderColumn)??[];
-      console.log('columnsSlots: ', columnsSlots);
+      const columnsSlots = columnList?.value?.map(renderColumn) ?? [];
+
       return (
-        <div class="h-table">
+        <div class="h-table" ref="hTableRef">
           <tool-layout
             v-slots={{
               leftHandleArea: () => {
@@ -164,6 +174,15 @@ export default defineComponent({
           >
             {columnsSlots}
           </el-table>
+
+          {props.total ? (
+            <el-pagination
+              {...mergeProps(paginationProps, {
+                "onUpdate:pageSize": sizeChange,
+                "onUpdate:currentPage": currentChange,
+              })}
+            />
+          ) : null}
         </div>
       );
     };
@@ -171,10 +190,17 @@ export default defineComponent({
   mounted() {
     // @ts-ignore
     this.injectTablePrimaryMethods();
+    this.handelFixHeader();
   },
   methods: {
-    // 将$refs.yoTable上的属性映射到this上, 防止父组件访问Table链过长
-    // https://element-plus.org/zh-CN/component/table.html#table-方法
+    handelFixHeader() {
+      const _self = this as any;
+      const hTableRef = _self["$refs"]["hTableRef"];
+      if (isDefined(this.fixHeader)) { 
+        useFixHeader(this.fixHeader as FixHeader, hTableRef);
+
+      }
+    },
     injectTablePrimaryMethods() {
       const _self = this as any;
       const elTableRef = _self["$refs"]["elTableRef"];

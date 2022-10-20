@@ -8,7 +8,7 @@
 export const hMoreBoxProps = {
     showNumber: {
         type: Number,
-        default:2
+        default:3
     }
 }
 

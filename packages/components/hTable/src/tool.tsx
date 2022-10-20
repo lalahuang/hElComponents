@@ -28,10 +28,14 @@ export default defineComponent({
       }
       return (
         <div class="h-table__tool-container">
-          <div class="left-tool-container">{leftHandleArea}</div>
+          <div class="left-tool-container">
+            <el-space>{leftHandleArea}</el-space>
+          </div>
           <div class="right-tool-container">
-            {handleArea}
-            <setting ></setting>
+            <el-space>
+              {handleArea}
+              <setting></setting>
+            </el-space>
           </div>
         </div>
       );
