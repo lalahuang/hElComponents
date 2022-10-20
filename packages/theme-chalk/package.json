@@ -1,9 +1,0 @@
-{
-  "name": "@h-components/theme-chalk",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.scss",
-  "style":"index.scss",
-  "author": "",
-  "license": "ISC"
-}
