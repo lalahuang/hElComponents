@@ -1,29 +1,36 @@
-import { defineConfig } from 'vite'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import Components from 'unplugin-vue-components/vite'
-import type { UserConfigExport } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueSetupExtend from 'unplugin-vue-setup-extend-plus/vite'
-import { resolve } from 'path'
-import dts from 'vite-plugin-dts' // https://github.com/qmhc/vite-plugin-dts
+/*
+ * @Author: hzm
+ * @Date: 2022-10-20 15:58:55
+ * @Description: 
+ */
+import vue from "@vitejs/plugin-vue";
+import dts from "vite-plugin-dts"; // https://github.com/qmhc/vite-plugin-dts
+import vueSetupExtend from "unplugin-vue-setup-extend-plus/vite"; // https://github.com/chenxch/unplugin-vue-setup-extend-plus
+import { resolve } from "path";
+import { copyFileSync } from "fs";
+import { version } from "./packages/components/package.json";
+import type { UserConfigExport } from "vite";
 
 export default (): UserConfigExport => {
   return {
     plugins: [
       vue(),
-      vueJsx({}),
       dts({
-        entryRoot: resolve(__dirname, "packages/components"),
-        outputDir: [
-          resolve(__dirname, "./dist/es"),
-          resolve(__dirname, "./dist/lib"),
-        ],
-        cleanVueFileName: false,
+        // logDiagnostics: true, // 是否打印类型诊断信息
+        // skipDiagnostics: false, // 是否跳过类型诊断
+        // aliasesExclude: ['./alert.vue'], // 设置在转换别名时哪些路径需要排除
+        staticImport: true, //是否将动态引入转换为静态
+        outputDir: ["./dist/lib", "./dist/es"], // 可以指定一个数组来输出到多个目录中
+        insertTypesEntry: true, // 是否生成类型声明入口
+        cleanVueFileName: true, // 是否将 '.vue.d.ts' 文件名转换为 '.d.ts'
+        copyDtsFiles: true, // 是否将源码里的 .d.ts 文件复制到 outputDir
+        include: ["./packages/components"], // 手动设置包含路径的 glob
+        // 构建后回调钩子
+        afterBuild: (): void => {
+          move();
+        },
       }),
       vueSetupExtend(),
-      Components({
-        dts: resolve(__dirname, "/packages/components/global-components.d.ts"),
-      }),
     ],
     resolve: {
       // https://cn.vitejs.dev/config/#resolve-alias
@@ -37,44 +44,78 @@ export default (): UserConfigExport => {
       // https://cn.vitejs.dev/config/#resolve-extensions
       extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
     },
-    mode: "production",
     build: {
-      target: "modules",
-      minify: true, // 压缩
-      chunkSizeWarningLimit: 2, // 超过 2kb 警告提示
-      reportCompressedSize: false,
+      target: "modules", // 这是指 支持原生 ES 模块、原生 ESM 动态导入
+      minify: true, // 压缩代码
+      chunkSizeWarningLimit: 2, // 打包的组件超过 2kb 警告提示
+      reportCompressedSize: true, // 启用 gzip 压缩大小报告
       emptyOutDir: false,
-      outDir: resolve(__dirname, "dist/es"),
+      outDir: resolve(__dirname, "./dist"), // 指定输出路径
+      // 库模式 https://cn.vitejs.dev/guide/build.html#library-mode
       lib: {
-        entry: resolve(__dirname, "packages/components/index.ts"),
-        name: "hcomponents",
+        entry: resolve(__dirname, "packages/components/index.ts"), // 打包日寇
+        name: "HComponentsNext", // 包名
       },
+      // rollup 配置项 https://rollupjs.org/guide/en/#big-list-of-options
       rollupOptions: {
-        input: [resolve(__dirname, "packages/components/index.ts")],
-        external: ["vue", "@h-components/utils", "element-plus"], // 确保外部化处理那些你不想打包进库的依赖
+        external: ["vue", "element-plus"], // 确保外部化处理那些你不想打包进库的依赖 https://rollupjs.org/guide/en/#external
+        
         output: [
           {
-            format: "es",
-            //不用打包成.es.js,这里我们想把它打包成.js
-            entryFileNames: "[name].js",
-            //让打包目录和我们目录对应
-            preserveModules: true,
-            //配置打包根目录
-            dir: resolve(__dirname, "./dist/es"),
+            format: "umd",
+            exports: "named",
+            sourcemap: false,
+            dir: "dist/dist",
+            entryFileNames: "index.umd.js",
+            chunkFileNames: "[name].js",
+            assetFileNames: "[name].[ext]",
+            namespaceToStringTag: true,
+            manualChunks: undefined,
+            inlineDynamicImports: false,
+            globals: { vue: "Vue", "element-plus": "ElementPlus" }, // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+          },
+          {
+            format: "es", // 打包模式 https://rollupjs.org/guide/en/#outputformat
+            exports: "named", // 导出模式 https://rollupjs.org/guide/en/#outputexports
+            dir: "dist/es", // 输出路径 https://rollupjs.org/guide/en/#outputdir
+            sourcemap: false, // https://rollupjs.org/guide/en/#outputsourcemap
+            entryFileNames: "index.js", // 输出后的文件名 https://rollupjs.org/guide/en/#outputentryfilenames
+            chunkFileNames: "[name].js", // 输出的 chunk文件名 https://rollupjs.org/guide/en/#outputchunkfilenames
+            assetFileNames: "[name].[ext]", // 输出资产文件名 https://rollupjs.org/guide/en/#outputassetfilenames
+            namespaceToStringTag: true, // https://rollupjs.org/guide/en/#outputnamespacetostringtag
+            inlineDynamicImports: false, // https://rollupjs.org/guide/en/#outputinlinedynamicimports
+            manualChunks: undefined,
+             // https://rollupjs.org/guide/en/#outputpreservemodules
           },
           {
             format: "cjs",
-            //不用打包成.mjs
-            entryFileNames: "[name].js",
-            //让打包目录和我们目录对应
-            preserveModules: true,
-            //配置打包根目录
-            dir: resolve(__dirname, "./dist/lib"),
+            exports: "named",
+            dir: "dist/lib",
+            sourcemap: false,
+            entryFileNames: "index.js",
+            chunkFileNames: "[name].js",
+            assetFileNames: "[name].[ext]",
+            namespaceToStringTag: true,
+            inlineDynamicImports: false,
+            manualChunks: undefined,
           },
         ],
       },
     },
-  };
-}
+  } as UserConfigExport;
+};
 
+const move = (): void => {
+  const files = [
+    {
+      input: "./package.json",
+      outDir: "dist/package.json",
+    },
+  ] as const;
 
+  files.forEach((item): void => {
+    copyFileSync(item.input, item.outDir);
+  });
+
+  console.warn("\n" + `Fighting Design ${version} 版本打包成功 🎉🎉🎉` + "\n");
+};

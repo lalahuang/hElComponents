@@ -1,6 +1,6 @@
 {
   "name": "h-components-next",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "type": "module",
   "description": "",
   "keywords": [
@@ -14,5 +14,4 @@
     "url": "http://www.lalahuang.cn"
   },
   "license": "ISC"
-  
 }

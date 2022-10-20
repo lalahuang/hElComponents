@@ -7,7 +7,7 @@ const { rootPath,componentPath } = require("../utils/paths.js");
 const run = require("../utils/run.js");
 const { src, dest } = require("gulp");
 const { resolve } = require("path");
-const { version } = require("../../packages/utils/package.json");
+// const { version } = require("../../packages/utils/package.json");
 const compPath = resolve(componentPath, "./package.json");
 const distPath = resolve(rootPath, "./dist");
 //复制
