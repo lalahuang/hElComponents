@@ -1,0 +1,10 @@
+.h-copy{
+    &__icon{
+        color:var(--el-color-primary);
+        cursor: pointer;
+        &--success{
+            color:var(--el-color-success);
+            cursor:auto;
+        }
+    }
+}

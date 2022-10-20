@@ -1,0 +1,18 @@
+{
+  "name": "h-components-next",
+  "version": "1.0.24",
+  "type": "module",
+  "description": "",
+  "keywords": [
+    "vuejs",
+    "components",
+    "ui"
+  ],
+  "main": "index.ts",
+  "author": {
+    "name": "lalahuang",
+    "url": "http://www.lalahuang.cn"
+  },
+  "license": "ISC"
+  
+}
