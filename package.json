@@ -10,17 +10,22 @@
     "tag",
     "queryWapper"
   ],
-  "files": [
-    "lib"
-  ],
-  "main": "lib/h-components.umd.js",
-  "module": "lib/h-components.mjs",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "exports": {
     ".": {
-      "import": "./lib/h-components.mjs",
-      "require": "./lib/h-components.umd.js"
-    }
+      "import": "./lib/index.js",
+      "require": "./es/index.js"
+    },
+    "./es/":"./es/"
   },
+  "unpkg": "dist/index.umd.js",
+  "style": "dist/index.css",
+  "sideEffects": [
+    "dist/index.css",
+    "theme/*",
+    "*.css"
+  ],
   "scripts": {
     "comp:build": "pnpm -C packages/components build",
     "clean": "rimraf dist",
@@ -34,6 +39,11 @@
     "build:utils": "pnpm clean:utils && vite build --config vite.config.utils.ts && pnpm publish:utils",
     "clean:utils": "rimraf distutils",
     "move:utils": "node script/moveutils.js"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "^9",
+    "element-plus": "^2",
+    "vue": "^3.2"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",

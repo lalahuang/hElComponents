@@ -43,6 +43,7 @@ export default defineConfig({
           items: [
             { text: "表格", link: "/component/table/" },
             { text: "复制", link: "/component/copy/" },
+            { text: "更多", link: "/component/morebox/" },
           ],
         },
       ],

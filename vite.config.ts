@@ -10,11 +10,12 @@ import { resolve } from "path";
 import { copyFileSync } from "fs";
 import { version } from "./packages/components/package.json";
 import type { UserConfigExport } from "vite";
-
+import vueJsx from "@vitejs/plugin-vue-jsx";
 export default (): UserConfigExport => {
   return {
     plugins: [
       vue(),
+      vueJsx({}),
       dts({
         // logDiagnostics: true, // 是否打印类型诊断信息
         // skipDiagnostics: false, // 是否跳过类型诊断
@@ -58,8 +59,17 @@ export default (): UserConfigExport => {
       },
       // rollup 配置项 https://rollupjs.org/guide/en/#big-list-of-options
       rollupOptions: {
-        external: ["vue", "element-plus"], // 确保外部化处理那些你不想打包进库的依赖 https://rollupjs.org/guide/en/#external
-        
+        external: [
+          "vue",
+          "element-plus",
+          "@element-plus/icons-vue",
+          "@vueuse/core",
+          "lodash",
+          "mitt",
+          "vue-clipboard3",
+          "zhyswan-vuedraggable",
+        ], // 确保外部化处理那些你不想打包进库的依赖 https://rollupjs.org/guide/en/#external
+
         output: [
           {
             format: "umd",
@@ -85,7 +95,8 @@ export default (): UserConfigExport => {
             namespaceToStringTag: true, // https://rollupjs.org/guide/en/#outputnamespacetostringtag
             inlineDynamicImports: false, // https://rollupjs.org/guide/en/#outputinlinedynamicimports
             manualChunks: undefined,
-             // https://rollupjs.org/guide/en/#outputpreservemodules
+            preserveModules: true,
+            // https://rollupjs.org/guide/en/#outputpreservemodules
           },
           {
             format: "cjs",
@@ -98,6 +109,7 @@ export default (): UserConfigExport => {
             namespaceToStringTag: true,
             inlineDynamicImports: false,
             manualChunks: undefined,
+            preserveModules: true,
           },
         ],
       },
