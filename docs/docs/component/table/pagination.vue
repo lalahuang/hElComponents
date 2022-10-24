@@ -5,7 +5,7 @@
 -->
 <template>
     <div>
-        <HTable :columns="columns" :data="data" :total="4" v-model:page-size="pageSize" background v-model:current-page="limit" @load="loadData"  >
+        <HTable :columns="columns" :data="data" :total="4" v-model:page-size="pageSize"  v-model:current-page="limit" @load="loadData"    >
             <template #leftHandleArea>
                 <el-button type="primary" size="default" @click="">按钮1</el-button>
                 <el-button type="primary" size="default" @click="">按钮2</el-button>
@@ -73,20 +73,20 @@ const columns = defineTableColumns<DataType>(
             prop: "address",
 
         },
-        {
-            label: "操作",
-            columnType: "menu",
-            width: "150px",
-            render: () => (
-                <>
-                    <el-link type="primary" target="_blank" > 增加 </el-link>
-                    <el-link type="primary" target="_blank" > 修改 </el-link>
-                    <el-link type="primary" target="_blank" > 查看 </el-link>
-                    <el-link type="primary" target="_blank" > 删除 </el-link>
-                    <el-link type="primary" target="_blank" > 其他操作 </el-link>
-                </>
-            )
-        }
+        // {
+        //     label: "操作",
+        //     columnType: "menu",
+        //     width: "150px",
+        //     render: () => (
+        //         <>
+        //             <el-link type="primary" target="_blank" > 增加 </el-link>
+        //             <el-link type="primary" target="_blank" > 修改 </el-link>
+        //             <el-link type="primary" target="_blank" > 查看 </el-link>
+        //             <el-link type="primary" target="_blank" > 删除 </el-link>
+        //             <el-link type="primary" target="_blank" > 其他操作 </el-link>
+        //         </>
+        //     )
+        // }
     ]
 )
 

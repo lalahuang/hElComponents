@@ -57,7 +57,7 @@ export default defineComponent({
       key.value = key.value + 1;
     });
     // 设置pagination props
-    const paginationProps = reactivePick(props, ...paginationKeys);
+    const paginationProps = reactivePick(props,  ...paginationKeys);
     const { currentChange, sizeChange } = usePagination(emit);
 
     return () => {
@@ -176,12 +176,14 @@ export default defineComponent({
           </el-table>
 
           {props.total ? (
-            <el-pagination
-              {...mergeProps(paginationProps, {
-                "onUpdate:pageSize": sizeChange,
-                "onUpdate:currentPage": currentChange,
-              })}
-            />
+            <div class="h-table__pagination">
+              <el-pagination
+                {...mergeProps(paginationProps, {
+                  "onUpdate:pageSize": sizeChange,
+                  "onUpdate:currentPage": currentChange,
+                })}
+              />
+            </div>
           ) : null}
         </div>
       );

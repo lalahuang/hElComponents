@@ -80,12 +80,14 @@ export default function useDataHandle({
     /**h-more-box */
     if (columnType == "menu") {
       const slot = vSlots.default;
+
       vSlots.default = (scope) => {
         return (
           <HMoreBox
             v-slots={{
               default: () => {
                 const context = slot?.(scope);
+                console.log("context: ", context, scope.row);
                 return isArray(context) ? context : context?.children;
               },
             }}

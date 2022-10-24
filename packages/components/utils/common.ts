@@ -4,10 +4,20 @@
  * @Description: 
 
 */
+import { Comment, Text } from "vue";
 
  export function getFirstImage(str: string, delimiter = ",") {
    if (str) {
      return str.split(delimiter)?.[0] ?? "";
    }
    return "";
- }
+}
+ 
+
+
+export const stripEmpty = (arr:any[]) => {
+  return arr.filter(
+    (o) => o.type !== Comment && (o.type !== Text || o.children.trim() !== "")
+  );
+};
+

@@ -23,6 +23,10 @@ export const paginationKeys = Object.keys(paginationProps) as PaginationKeys;
 
 export const tableProps = {
   ...paginationProps,
+  layout: {
+    type: String,
+    default:"->,total, sizes, prev, pager, next, jumper"
+  },
   fixHeader:Object as PropType<FixHeader>,
   columns: {
     type: Array as PropType<ITableColumns>,

@@ -52,7 +52,7 @@
     "h-components-next": "workspace:^1.0.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
-    "vue": "^3.2.37",
+    "vue": "^3.2.40",
     "vue-clipboard3": "^2.0.0",
     "zhyswan-vuedraggable": "^4.1.3"
   },
