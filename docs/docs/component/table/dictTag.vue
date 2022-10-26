@@ -19,6 +19,7 @@
 <script setup lang="tsx">
 import { HTable } from "h-components-next";
 import { defineTableColumns } from "h-components-next/hTable";
+import { ref } from "vue";
 
 interface DataType {
     date: string,
@@ -49,6 +50,18 @@ const data = [
         status: 0,
     },
 ]
+
+const optionref = ref([]);
+setTimeout(() => {
+    optionref.value = [
+        {
+            label: "正常",
+            value: 0,
+            dictType: "hTag",
+            elTagType: "primary"
+        }
+    ]
+},3000)
 const columns = defineTableColumns<DataType>(
     [
         {
@@ -71,14 +84,7 @@ const columns = defineTableColumns<DataType>(
             prop: "status",
             columnType: "dict",
             options: {
-                list: [
-                    {
-                        label: "正常",
-                        value: 0,
-                        dictType: "hTag",
-                        elTagType: "primary"
-                    }
-                ],
+                list: optionref,
             },
         },
     ]

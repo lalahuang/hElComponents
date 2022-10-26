@@ -14,11 +14,11 @@
   "module": "es/index.js",
   "exports": {
     ".": {
-      "import": "./lib/index.js",
-      "require": "./es/index.js"
-    },
-    "./es/":"./es/"
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
+    }
   },
+  "types": "./dist/es/index.d.ts",
   "unpkg": "dist/index.umd.js",
   "style": "dist/index.css",
   "sideEffects": [
@@ -30,7 +30,7 @@
     "comp:build": "pnpm -C packages/components build",
     "clean": "rimraf dist",
     "move": "node script/move.js",
-    "build": "pnpm clean && pnpm build:css && build:theme && vite build   && pnpm publish:comp",
+    "build": "pnpm clean && pnpm build:css && pnpm build:theme && pnpm vite build   && pnpm publish:comp",
     "build:lib": "vite build --config vite.config.lib.ts",
     "build:css": "vite build --config vite.config.css.ts",
     "publish:comp": "gulp -f script/publish/gulpfile.js",
@@ -60,6 +60,7 @@
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
     "rimraf": "^3.0.2",
     "sass": "^1.54.5",
     "typescript": "^4.8.4",

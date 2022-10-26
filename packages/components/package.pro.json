@@ -14,8 +14,8 @@
   "module": "es/index.js",
   "exports": {
     ".": {
-      "import": "./lib/index.js",
-      "require": "./es/index.js"
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
     },
     "./es/": "./es/",
     "./lib/": "./lib/",

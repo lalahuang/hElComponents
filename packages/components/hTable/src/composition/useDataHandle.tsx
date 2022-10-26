@@ -11,7 +11,7 @@ import { ColumnTypeOptions, columnType } from '../types';
 import HMoreBox from "../../../hMoreBox";
 import HCopy from "../../../hCopy";
 import DictTag from "../../../hDictTag";
-import { h } from "vue";
+import { isRef } from "vue";
 
 export default function useDataHandle({
   prop,
@@ -73,7 +73,10 @@ export default function useDataHandle({
     if (prop && columnType == "dict") {
       vSlots.default = (scope) => {
         const data = get(scope.row, prop);
-        return <DictTag options={options?.list ?? []} value={data}></DictTag>;
+        const optionList = isRef(options?.list)
+          ? options?.list?.value
+          : options?.list;
+        return <DictTag options={optionList ?? []} value={data}></DictTag>;
       };
     }
 

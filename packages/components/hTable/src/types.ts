@@ -18,6 +18,7 @@ import type {
 } from "../../commonTypes";
 import type { DictTagOption } from "../../hDictTag";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
+import { MaybeRef } from '../../commonTypes';
 
 
 /** Table Column Options for pro-table */
@@ -79,7 +80,7 @@ export interface TableCommonColumn<T = ExternalParam> extends TableColumnsProps 
 /** 组件选项 */
 export interface ColumnTypeOptions {
   /** 数据列表 */
-  list?: DictTagOption[];
+  list?:MaybeRef<DictTagOption[]>;
 }
 export type columnType = "dict" | "image" | "menu" | "copy";
 

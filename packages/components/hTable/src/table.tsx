@@ -93,7 +93,7 @@ export default defineComponent({
         if (prop) {
           vSlots.default = (scope) => {
             const data = get(scope.row, prop);
-            return data ? <span>{data}</span> : <>-</>;
+            return isDefined(data)&&data!=="" ? <span>{data}</span> : <>-</>;
           };
         }
         if (typeof render === "function") {
