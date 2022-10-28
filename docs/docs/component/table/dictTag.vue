@@ -10,7 +10,7 @@
 -->
 <template>
     <div>
-        <HTable :columns="columns" :data="data">
+        <HTable :columns="columns"  :data="lazyData" :total="query.total" v-model:pageSize="query.size" @load="renderData" v-model:currentPage="query.page" >
 
         </HTable>
     </div>
@@ -27,41 +27,83 @@ interface DataType {
     address: number,
     status?: number,
 }
+
 const data = [
-    {
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-    },
-    {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-    },
+
     {
         date: '2016-05-04',
         name: 'Tom',
         address: 'No. 189, Grove St, Los Angeles',
+        status: '1'
+    },
+    {
+        date: '2016-05-012',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+        status: '0',
     },
     {
         date: '2016-05-01',
         name: 'Tom',
         address: 'No. 189, Grove St, Los Angeles',
-        status: 0,
+        status: '2',
+    },
+
+]
+const data2 = [
+
+    {
+        date: '2016-05-042',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+        status: '1'
+    },
+    {
+        date: '2016-05-012',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+        status: '2',
+    },
+    {
+        date: '2016-05-012',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+        status: '0',
     },
 ]
+
+
+renderData()
+const query = ref({
+    page: 1,
+    size: 10,
+    total: 20
+})
+const lazyData = ref([])
+const status = ['0', '1', '2']
+function renderData() {
+    setTimeout(() => {
+        lazyData.value = query.value.page == 1 ? data : data2
+    },1000)
+}
 
 const optionref = ref([]);
 setTimeout(() => {
     optionref.value = [
         {
             label: "正常",
-            value: 0,
+            value: "1",
+            dictType: "hTag",
+            elTagType: "primary"
+        },
+        {
+            label: "正常1",
+            value: "0",
             dictType: "hTag",
             elTagType: "primary"
         }
     ]
-},3000)
+},1000)
 const columns = defineTableColumns<DataType>(
     [
         {

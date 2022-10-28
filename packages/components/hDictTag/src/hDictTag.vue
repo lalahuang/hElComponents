@@ -20,12 +20,6 @@
             :class="item.elTagType"
             >{{ item.label }}</span
           >
-          <h-tag
-            v-else-if="item.dictType == 'hTag'"
-            :key="item.value + ''"
-            :content="item.label"
-            :type="item.elTagType"
-          ></h-tag>
           <el-tag
             v-else-if="item.dictType == 'elTag'"
             :disable-transitions="true"
@@ -35,6 +29,7 @@
           >
             {{ item.label }}
           </el-tag>
+          <h-tag v-else :key="item.value + ''" :content="item.label" :type="item.elTagType"></h-tag>
         </template>
       </template>
     </el-space>
@@ -51,9 +46,8 @@ export default defineComponent({
 
 <script setup lang="ts">
 import HTag from "../../hTag/index";
-import { hDictTagProps } from "./types";
+import { hDictTagProps } from "./types"; 
 const props = defineProps(hDictTagProps);
-console.log('props: ', props);
 const isEmpty = ref(false);
 let count = 0;
 function checkIsInclude(value: string | number) {
@@ -65,7 +59,10 @@ function checkIsInclude(value: string | number) {
   } else {
     count++;
     if (count == props.options.length) {
+      
       isEmpty.value = true;
+      
+      count = 0;
     }
     return false;
   }
@@ -74,7 +71,6 @@ function checkIsInclude(value: string | number) {
 
 const values = computed(() => {
   if (props.value !== null && typeof props.value !== "undefined") {
-    
     return Array.isArray(props.value) ? props.value : [String(props.value)];
   } else {
     isEmpty.value = true;

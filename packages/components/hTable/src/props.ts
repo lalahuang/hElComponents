@@ -23,11 +23,19 @@ export const paginationKeys = Object.keys(paginationProps) as PaginationKeys;
 
 export const tableProps = {
   ...paginationProps,
+  /**是否显示设置 */
+  showSettingIcon: {
+    type: Boolean,
+    default: true,
+  },
+  /**分页默认布局 */
   layout: {
     type: String,
-    default:"->,total, sizes, prev, pager, next, jumper"
+    default: "->,total, sizes, prev, pager, next, jumper",
   },
-  fixHeader:Object as PropType<FixHeader>,
+  /**固定头部 */
+  fixHeader: Object as PropType<FixHeader>,
+  /**行配置 */
   columns: {
     type: Array as PropType<ITableColumns>,
     default: undefined,

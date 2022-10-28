@@ -10,6 +10,7 @@ import { hMoreBoxProps } from './props';
 import { flatten } from 'lodash';
 import { ElDropdownItem,ElDropdownMenu,ElDropdown,ElSpace,ElLink,ElIcon } from "element-plus";
 import useSlot from '../../composables/useSlot';
+import { stripEmpty } from '@/components/utils';
 export default defineComponent({
   name: "HMoreBox",
   props: hMoreBoxProps,
@@ -27,13 +28,15 @@ const renderSlots = () => {
   // const { visibleSlotEntries } = useSlot(slots.default);
 
   const vslots = resolveSlots(slots?.default?.() ?? []);
-  console.log("vslots: ", vslots);
+  console.log("vslots: ", vslots,vslots.length, vslots.length > defaultNumber);
 
   if (vslots?.length && vslots.length > defaultNumber) {
     defaultList = vslots.slice(0, defaultNumber);
     contractionList = vslots.slice(defaultNumber);
   } else {
     defaultList = vslots;
+    /** 修复存在缓存不更新的情况 */
+    contractionList=[]
   }
   console.log("defaultList: ", defaultList);
 
@@ -49,13 +52,15 @@ const renderSlots = () => {
 
 /** 解析slots?.default?.() */
 const resolveSlots = (vslots: VNode[]) => {
-  return flatten(
-    vslots?.map?.((vnode) => {
-      return vnode.type.toString() == "Symbol(Fragment)" &&
-        vnode?.children?.length
-        ? vnode.children
-        : vnode;
-    }) ?? []
+  return stripEmpty(
+    flatten(
+      vslots?.map?.((vnode) => {
+        return vnode.type.toString() == "Symbol(Fragment)" &&
+          vnode?.children?.length
+          ? vnode.children
+          : vnode;
+      }) ?? []
+    )
   ) as VNode[];
 };
 

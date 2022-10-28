@@ -5,7 +5,7 @@
  */
 import hMoreBox from "./src/hMoreBox";
 
-import { withInstall } from "@comp/utils";
+import { withInstall } from "../utils";
 export const HMoreBox = withInstall(hMoreBox);
 
 export type HMoreBoxInstance = InstanceType<typeof HMoreBox>;

@@ -4,7 +4,7 @@
  * @Description: 
 
 */
-import { Comment, Text } from "vue";
+import { Comment, Text,Fragment } from "vue";
 
  export function getFirstImage(str: string, delimiter = ",") {
    if (str) {

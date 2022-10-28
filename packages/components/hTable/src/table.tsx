@@ -66,6 +66,9 @@ export default defineComponent({
       const renderColumn = (columnDict: TableColumn, index: number) => {
         if (columnDict.hide) {
           return;
+        } else {
+          /**初始化 */
+          columnDict.hide = false;
         }
         const { render, slotName, headerSlotName, children, ...restAtts } =
           columnDict;
@@ -149,6 +152,7 @@ export default defineComponent({
       return (
         <div class="h-table" ref="hTableRef">
           <tool-layout
+            showSettingIcon={props.showSettingIcon}
             v-slots={{
               leftHandleArea: () => {
                 return slots.leftHandleArea && slots.leftHandleArea();

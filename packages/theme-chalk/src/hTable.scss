@@ -11,7 +11,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
   
       .right-tool-setting {
         width: 30px;
@@ -75,6 +75,9 @@
         background: var(--el-color-primary-light-8);
         .column-setting-top-bottom {
           display: flex;
+          .el-icon{
+            cursor: pointer;
+          }
         }
       }
   

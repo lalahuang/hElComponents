@@ -5,7 +5,7 @@
 -->
 <template>
     <div>
-        <h-more-box >
+        <h-more-box  >
             <el-link type="primary" :underline="false" href="" target="_blank">1</el-link>
             <el-link type="primary" :underline="false" href="" target="_blank">2</el-link>
             <el-link type="primary" :underline="false" href="" target="_blank">3</el-link>

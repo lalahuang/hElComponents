@@ -24,7 +24,7 @@
           </div>
           <el-checkbox
             class=" column-setting-checkbox"
-            :model-value="element.hide"
+            :model-value="!element.hide"
             :indeterminate="false"
             @change="(v: boolean) => propChange(v, index)"
           >
@@ -79,8 +79,10 @@ import type { ITableColumns } from "./types";
 import { emitter } from "../../utils";
 const columns: ITableColumns = inject("column") ?? [];
 const columnsList=ref(columns)
+console.log('columnsList: ', columnsList.value);
 const propChange = (v: boolean, index: number) => {
-  columnsList.value[index].hide = v;
+  console.log('v: boolean, index: number: ', v, index);
+  columnsList.value[index].hide = !v;
 };
 const fixTop = (index: number) => {
   // @ts-ignore

@@ -11,4 +11,5 @@ export { default as HTable } from "./hTable";
 export * from "./hTable";
 export { default as HMoreBox } from "./hMoreBox";
 export { default as HCopy } from "./hCopy";
+export { default as HQueryForm } from "./hQueryForm";
 // export * from "./hTable";
