@@ -14,7 +14,7 @@ export const hQueryFormProp = {
   },
   operationFollow: {
     type: Boolean,
-    default: true,
+    default: false,//默认不跟随
   },
 };
 

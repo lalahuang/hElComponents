@@ -64,7 +64,7 @@
     </draggable>
     <template #reference>
       <div class="right-tool-setting">
-        <el-icon><Setting /></el-icon>
+        <i class="iconfont icon-shezhi"></i>
       </div>
     </template>
   </el-popover>

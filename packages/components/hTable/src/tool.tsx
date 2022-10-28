@@ -48,10 +48,10 @@ export default defineComponent({
                 <el-space>{leftHandleArea}</el-space>
               </div>
               <div class="right-tool-container">
-                <el-space>
+                
                   {handleArea}
                   {props.showSettingIcon ? <setting></setting> : null}
-                </el-space>
+                
               </div>
             </div>
           ) : null}

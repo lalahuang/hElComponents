@@ -1,94 +1,96 @@
-
-
-
-
-
-
-.h-table{
+.h-table {
 
   .h-table__tool-container {
-      width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    .right-tool-container {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      margin-bottom: 16px;
-  
+
       .right-tool-setting {
-        width: 30px;
-        height: 30px;
-        border: 1px solid rgb(229, 230, 235);
-        border-radius: 100%;
+        
+        color:var(--h-table-tool-icon-color);
+        margin-left: 16px;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        img {
-          width: 15px;
-          height: 15px;
-          display: inline-block;
-        }
       }
     }
+
+  }
 
   &__column-image {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  &__pagination {
+    margin-top: 18px;
+  }
+
+  .h-table-header_tooltip {
+    display: inline-flex;
+    align-items: center;
+
+    i {
+      margin-left: 4px;
     }
-    &__pagination{
-      margin-top: 18px;
-    }
-  .h-table-header_tooltip{
-  display: inline-flex;
+  }
+
+
+
+
+}
+
+.h-table__setting-popover {
+
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+
+}
+
+.h-table__setting-inner {
+
+  display: flex;
   align-items: center;
-  i{
-    margin-left: 4px;
+  justify-content: space-between;
+  padding: 0 8px;
+  transition: all .3s ease-in-out;
+
+  .sort-handel {
+    cursor: move;
+
+    .el-icon {
+      display: flex;
+    }
+  }
+
+  &:hover {
+    background: var(--el-color-primary-light-8);
+
+    .column-setting-top-bottom {
+      display: flex;
+
+      .el-icon {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .column-setting-checkbox.el-checkbox {
+    margin-left: 24px;
+    width: 200px;
+    overflow: hidden;
+  }
+
+  .column-setting-top-bottom {
+    display: none;
+    align-items: center;
   }
 }
-
-
-
-
-}
-
-    .h-table__setting-popover {
-  
-      padding-left: 0px !important;
-      padding-right: 0px !important;
-  
-    }
-  
-    .h-table__setting-inner {
-      
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 8px;
-        transition: all .3s ease-in-out;
-        .sort-handel{
-          cursor: move;
-          .el-icon{
-            display: flex;
-          }
-        }
-      &:hover {
-        background: var(--el-color-primary-light-8);
-        .column-setting-top-bottom {
-          display: flex;
-          .el-icon{
-            cursor: pointer;
-          }
-        }
-      }
-  
-      .column-setting-checkbox.el-checkbox {
-        margin-left: 24px;
-        width: 200px;
-        overflow: hidden;
-      }
-  
-      .column-setting-top-bottom {
-        display: none;
-        align-items: center;
-      }
-    }
