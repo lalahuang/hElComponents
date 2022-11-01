@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HTable :columns="columns" :data="data">
+        <HTable  border :columns="columns" :data="data" >
 
         </HTable>
     </div>
@@ -18,7 +18,7 @@ interface DataType {
 const data = [
     {
         date: '2016-05-03',
-        name: 'Tom',
+        name: 0,
         address: 'No. 189, Grove St, Los Angeles',
     },
     {

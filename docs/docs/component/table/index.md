@@ -9,6 +9,7 @@ import headerDescription from './headerDescription.vue';
 import tablemenu from './menu.vue';
 import pagination from './pagination.vue';
 import fixHeader from './fixHeader.vue';
+import headFull from './headFull.vue';
 
 </script>
 
@@ -105,13 +106,28 @@ import fixHeader from './fixHeader.vue';
 ## 固定表头
 
 
-你可以使用 `columnType='fixHeader'` 属性来使用固定表头功能
+你可以使用 'fixHeader'` 属性来使用固定表头功能
 
 :::demo table/fixHeader
 
 <fixHeader></fixHeader>
 
 :::
+
+
+## 高度撑满
+
+
+你可以使用 `height='100%'` 属性来撑满表格
+
+:::demo table/headFull
+
+<headFull></headFull>
+
+:::
+
+
+
 
 ## HTable 属性
 

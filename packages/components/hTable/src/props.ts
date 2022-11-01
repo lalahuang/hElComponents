@@ -23,6 +23,11 @@ export const paginationKeys = Object.keys(paginationProps) as PaginationKeys;
 
 export const tableProps = {
   ...paginationProps,
+  /** loading */
+  loading: {
+    type: Boolean,
+    default: false,
+  },
   /**是否显示设置 */
   showSettingIcon: {
     type: Boolean,

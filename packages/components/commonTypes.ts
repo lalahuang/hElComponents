@@ -143,3 +143,10 @@ export type Paths<T, D extends number = 10> = [D] extends [never]
         : never;
     }[keyof T]
   : "";
+
+  export interface ValidateError {
+    message?: string;
+    fieldValue?: ExternalParam;
+    field?: string;
+  }
+  export declare type ValidateFieldsError = Record<string, ValidateError[]>;

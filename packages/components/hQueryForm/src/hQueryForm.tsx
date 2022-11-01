@@ -4,13 +4,13 @@
  * @Description:
  */
 
-import { useResizeObserver } from "@vueuse/core";
-import { defineComponent, ref, VNode } from "vue";
-import { ElForm, ElCol, ElRow, ElIcon,ElSpace } from "element-plus";
+import { useResizeObserver, reactivePick } from '@vueuse/core';
+import { defineComponent, ref, VNode, mergeProps } from "vue";
+import { ElForm, ElCol, ElRow, ElIcon,ElSpace,FormInstance } from "element-plus";
 import { ArrowDownBold } from "@element-plus/icons-vue";
 
-import { hQueryFormProp, hQueryFormEmits } from "./props";
-import { FormLayout, SpanConfig } from "./type";
+import { hQueryFormProp, hQueryFormEmits,formKeys } from "./props";
+import { FormLayout, SpanConfig, IFormExpose } from './type';
 export default defineComponent({
   name: "HQueryForm",
   props: hQueryFormProp,
@@ -34,7 +34,9 @@ export default defineComponent({
     const currentSpan = ref(0);
     // 是否收起
     const collapsed = ref(true);
-
+    const formRef = ref<FormInstance>();
+    /**获取ELForm props */
+    const elFormProps = reactivePick(props, ...formKeys);
     const CONFIG_SPAN_BREAKPOINTS: { [key in string]: number } = {
       xs: 513,
       sm: 513,
@@ -194,10 +196,7 @@ export default defineComponent({
           curspan += formItem.colSpan;
         }
         cols.push(
-          <ElCol
-            span={formItem.colSpan}
-            v-show={!formItem.hidden}
-          >
+          <ElCol span={formItem.colSpan} v-show={!formItem.hidden}>
             {formItem.formItem}
           </ElCol>
         );
@@ -252,31 +251,33 @@ export default defineComponent({
     /**
      * 渲染操作按钮
      */
-      function renderHandelItem() {
-      
+    function renderHandelItem() {
       return (
         <div
           class="h-queryForm__handelArea"
-      
           style={`justify-content:${
             props.operationFollow ? "flex-start" : "flex-end"
           }`}
-          >
+        >
           {slots?.handleArea?.()}
           {needCollapseRender() ? renderCollapsed() : ""}
         </div>
       );
     }
-
+    
     return () => {
       return (
         <>
           <div ref={hQueryFormRef} class="h-queryForm">
             <ElForm
-              labelPosition={
-                spanInfo.value.layout == "horizontal" ? "left" : "top"
-              }
-              {...attrs}
+              ref="formRef"
+              {...mergeProps(elFormProps, {
+                labelPosition:
+                  spanInfo.value.layout == "vertical"
+                    ? "top"
+                    : props.labelPosition || "right",
+              })}
+             
             >
               {renderELRow()}
             </ElForm>
@@ -284,5 +285,30 @@ export default defineComponent({
         </>
       );
     };
+  },
+  mounted() {
+    this.injectTablePrimaryMethods();
+  },
+  methods: {
+
+    /** 将elForm 暴露的方法转移到hqueryform */
+    injectTablePrimaryMethods() {
+      const _self = this as any;
+      const elFormRef = _self["$refs"]["formRef"];
+      const formMethodNameList = [
+        "validate",
+        "validateField",
+        "resetFields",
+        "scrollToField",
+        "clearValidate",
+      ];
+      for (const methodName of formMethodNameList) {
+        if (_self[methodName]) {
+          console.warn(`the ${methodName} method is exist!, please rename it `);
+        } else {
+          _self[methodName] = elFormRef?.[methodName as keyof IFormExpose];
+        }
+      }
+    },
   },
 });

@@ -1,24 +1,33 @@
 <!--
  * @Author: hzm
- * @Date: 2022-10-19 08:32:40
+ * @Date: 2022-10-31 13:58:30
  * @Description: 
 -->
 <template>
-    <div>
-        <HTable :columns="columns" :data="data" :total="4" v-model:page-size="pageSize"  v-model:current-page="limit" @load="loadData"    >
-            <template #leftHandleArea>
-                <el-button type="primary" size="default" @click="">按钮1</el-button>
-                <el-button type="primary" size="default" @click="">按钮2</el-button>
-                <el-link type="primary" :underline="false" href="" target="_blank">文档1</el-link>
-            
+    <div style="height: 300px;display: flex; flex-direction: column;">
+        <div>
+            ceshiceshiceshiceshiceshi
+        </div>
+
+<HTable :columns="columns" :data="data" :total="4" v-model:page-size="pageSize" v-model:current-page="limit"
+@load="loadData" height="100%">
+</HTable>
+       
+        <!-- <el-dialog
+            title="测试高度"
+            v-model="diaopen"
+            width="30%"
+            >
+           
+              
+            <template #footer>
+            <span>
+                <el-button type="primary" @click="">OK</el-button>
+            </span>
             </template>
-            <template #handleArea>
-                <el-button type="primary" size="default" @click="">按钮1</el-button>
-                <el-button type="primary" size="default" @click="">按钮2</el-button>
-                <el-link type="primary" :underline="false" href="" target="_blank">文档1</el-link>
-                
-            </template>
-        </HTable>
+        </el-dialog> -->
+        
+        
     </div>
 </template>
 
@@ -26,9 +35,9 @@
 import { HTable } from "h-components-next";
 import { defineTableColumns } from "h-components-next/hTable";
 import { ref } from "vue";
-
-const pageSize=ref(1)
-const limit=ref(1)
+const diaopen = ref(true)
+const pageSize = ref(1)
+const limit = ref(1)
 interface DataType {
     date: string,
     name: string
@@ -73,12 +82,15 @@ const columns = defineTableColumns<DataType>(
             prop: "address",
 
         },
-       
+
     ]
 )
 
-const  loadData=()=> {
+const loadData = () => {
     console.log('loadData: ', "数据加载成功");
-    
+
 }
 </script>
+<style >
+
+</style>

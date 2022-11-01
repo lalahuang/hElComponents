@@ -17,10 +17,14 @@
       "import": "./es/index.js",
       "require": "./lib/index.js"
     },
-    "./es/": "./es/",
-    "./lib/": "./lib/",
+    "./lib": "./lib/index.js",
+    "./es/*.mjs": "./es/*.mjs",
+    "./es/*": "./es/*.mjs",
+    "./lib/*.js": "./lib/*.js",
+    "./lib/*": "./lib/*.js",
     "./dist/": "./dist/",
-    "./theme/": "./theme/"
+    "./theme/": "./theme/",
+    "./*": "./*"
   },
   "unpkg": "dist/index.umd.js",
   "style": "dist/index.css",

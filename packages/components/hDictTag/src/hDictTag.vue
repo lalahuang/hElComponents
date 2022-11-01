@@ -45,10 +45,11 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
+
 import HTag from "../../hTag/index";
 import { hDictTagProps } from "./types"; 
 const props = defineProps(hDictTagProps);
-const isEmpty = ref(false);
+const isEmpty = ref(true);
 let count = 0;
 function checkIsInclude(value: string | number) {
 
@@ -59,9 +60,6 @@ function checkIsInclude(value: string | number) {
   } else {
     count++;
     if (count == props.options.length) {
-      
-      isEmpty.value = true;
-      
       count = 0;
     }
     return false;

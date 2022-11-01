@@ -13,11 +13,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 .icon-shezhi:before {
     content: "\e659";
 }
-
 .icon-gengduo-mian:before {
     content: "\e673";
+}
+.icon-hangjushezhi:before {
+    content: "\e67e";
 }

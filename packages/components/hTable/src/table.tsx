@@ -2,36 +2,34 @@
  * @Author: hzm
  * @Date: 2022-08-19 10:33:46
  * @Description:
- *
- * //支持slots 、json传列表
- * <h-table
- * :columns=""
- *
- * >
- * </h-table>
- *
- *
- *
- *
- *
+ * 
  */
 
-import { defineComponent, App, PropType, createApp, ref, computed,onMounted,nextTick } from "vue";
+import {
+  defineComponent,
+  App,
+  PropType,
+  createApp,
+  ref,
+  computed,
+  onMounted,
+  nextTick,
+} from "vue";
 
 import ToolLayout from "./tool";
 import DictTag from "@comp/hDictTag/src/hDictTag.vue";
 import { emitter } from "../../utils";
-import useDataHandle from './composition/useDataHandle';
-import { tableProps, paginationKeys,tableEmits } from './props';
+import useDataHandle from "./composition/useDataHandle";
+import { tableProps, paginationKeys, tableEmits } from "./props";
 import { FixHeader, ITableColumns, ITableExpose, TableColumn } from "./types";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
-import useHeaderTootip from './composition/useHeaderTootip';
+import useHeaderTootip from "./composition/useHeaderTootip";
 import { get } from "lodash";
-import { reactivePick  } from '@vueuse/core';
-import { mergeProps  } from 'vue';
+import { reactivePick,reactiveOmit } from "@vueuse/core";
+import { mergeProps } from "vue";
 import { usePagination } from "./composition/usePagination";
-import useFixHeader from './composition/useFixHeader';
-import { isDefined  } from '@vueuse/core';
+import useFixHeader from "./composition/useFixHeader";
+import { isDefined } from "@vueuse/core";
 export default defineComponent({
   name: "HTbale",
   props: tableProps,
@@ -56,8 +54,21 @@ export default defineComponent({
       columnList.value = val as ITableColumns<any>;
       key.value = key.value + 1;
     });
+
+    /**筛选elTable选项 */
+    const tablePropsPick = reactiveOmit(
+      props,
+      ...paginationKeys,
+      "showSettingIcon",
+      "columns",
+      "fixHeader",
+      "showOverflowTooltip",
+      "align",
+      "headerAlign"
+    );
+
     // 设置pagination props
-    const paginationProps = reactivePick(props,  ...paginationKeys);
+    const paginationProps = reactivePick(props, ...paginationKeys);
     const { currentChange, sizeChange } = usePagination(emit);
 
     return () => {
@@ -96,7 +107,11 @@ export default defineComponent({
         if (prop) {
           vSlots.default = (scope) => {
             const data = get(scope.row, prop);
-            return isDefined(data)&&data!=="" ? <span>{data}</span> : <>-</>;
+            return isDefined(data) && data !== "" ? (
+              <span>{data}</span>
+            ) : (
+              <>-</>
+            );
           };
         }
         if (typeof render === "function") {
@@ -148,47 +163,53 @@ export default defineComponent({
         );
       };
       const columnsSlots = columnList?.value?.map(renderColumn) ?? [];
-
       return (
-        <div class="h-table" ref="hTableRef">
-          <tool-layout
-            showSettingIcon={props.showSettingIcon}
-            v-slots={{
-              leftHandleArea: () => {
-                return slots.leftHandleArea && slots.leftHandleArea();
-              },
-              handleArea: () => {
-                return slots.handleArea && slots.handleArea();
-              },
-            }}
-          ></tool-layout>
-          <el-table
-            key={key.value}
-            data={data}
-            ref="elTableRef"
-            {...attrs}
-            v-slots={{
-              append: () => {
-                return slots.append && slots.append();
-              },
-              empty: () => {
-                return slots.empty && slots.empty();
-              },
-            }}
-          >
-            {columnsSlots}
-          </el-table>
-
-          {props.total ? (
-            <div class="h-table__pagination">
-              <el-pagination
-                {...mergeProps(paginationProps, {
-                  "onUpdate:pageSize": sizeChange,
-                  "onUpdate:currentPage": currentChange,
-                })}
-              />
+        <div
+          class={props.height == "100%" ? "h-table isFixedHeader" : "h-table"}
+          ref="hTableRef"
+        >
+          <div class="h-table__container">
+            <tool-layout
+              showSettingIcon={props.showSettingIcon}
+              v-slots={{
+                leftHandleArea: () => {
+                  return slots.leftHandleArea && slots.leftHandleArea();
+                },
+                handleArea: () => {
+                  return slots.handleArea && slots.handleArea();
+                },
+              }}
+            ></tool-layout>
+            <div class="h-table__container--eltable">
+              <el-table
+                v-loading={ props.loading }
+                key={key.value}
+                ref="elTableRef"
+                {...mergeProps(tablePropsPick, attrs)}
+                v-slots={{
+                  append: () => {
+                    return slots.append && slots.append();
+                  },
+                  empty: () => {
+                    return slots.empty && slots.empty();
+                  },
+                }}
+              >
+                {columnsSlots}
+              </el-table>
             </div>
-          ) : null}
+
+            {props.total ? (
+              <div class="h-table__pagination">
+                <el-pagination
+                  {...mergeProps(paginationProps, {
+                    "onUpdate:pageSize": sizeChange,
+                    "onUpdate:currentPage": currentChange,
+                  })}
+                />
+              </div>
+            ) : null}
+          </div>
         </div>
       );
     };
@@ -202,9 +223,8 @@ export default defineComponent({
     handelFixHeader() {
       const _self = this as any;
       const hTableRef = _self["$refs"]["hTableRef"];
-      if (isDefined(this.fixHeader)) { 
+      if (isDefined(this.fixHeader)) {
         useFixHeader(this.fixHeader as FixHeader, hTableRef);
-
       }
     },
     injectTablePrimaryMethods() {
@@ -220,6 +240,10 @@ export default defineComponent({
         "clearFilter",
         "doLayout",
         "sort",
+        "getSelectionRows",
+        "scrollTo",
+        "setScrollTop",
+        "setScrollLeft",
       ];
       for (const methodName of tableMethodNameList) {
         if (_self[methodName]) {

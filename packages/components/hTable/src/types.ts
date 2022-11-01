@@ -139,6 +139,14 @@ export interface ITableExpose<T = ExternalParam> {
   clearFilter: (columnKeys?: MaybeArray<string>) => void;
   doLayout: () => void;
   sort: (prop: string, order: string) => void;
+  /** 新增四个方法 */
+  getSelectionRows: (prop: string, order: string) => void;
+  scrollTo: (
+    options: number | ScrollToOptions,
+    yCoord?: number | undefined
+  ) => void;
+  setScrollLeft: (left?: number | undefined) => void;
+  setScrollTop: (top?: number | undefined) => void;
 }
 
 export type ITableProps = IDefineProps<typeof tableProps>;

@@ -6,6 +6,9 @@
 
 import { formProps } from "element-plus";
 
+
+type formPropsKeys = Array<keyof typeof formProps>;
+export const formKeys = Object.keys(formProps) as formPropsKeys;
 export const hQueryFormProp = {
   ...formProps,
   showLength: {
