@@ -17,7 +17,11 @@ export const hQueryFormProp = {
   },
   operationFollow: {
     type: Boolean,
-    default: false,//默认不跟随
+    default: false, //默认不跟随
+  },
+  rowGutter: {
+    type: Number,
+    default:16
   },
 };
 

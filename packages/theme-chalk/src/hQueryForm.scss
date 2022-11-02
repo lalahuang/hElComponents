@@ -14,7 +14,7 @@
         margin-bottom: 18px;
 
         .h-queryForm__handelArea--collapse {
-            margin-left: 8px;
+            margin-left: 16px;
             .collapse-text {
                 font-size: 14px;
                 color: var(--el-color-primary);
@@ -27,9 +27,8 @@
                 color: var(--el-color-primary);
                 vertical-align: middle;
                 transition: 0.3s all;
-
                 cursor: pointer;
-                margin-left: 4px;
+                margin-left: 8px;
             }
         }
     }

@@ -46,7 +46,6 @@ export default defineComponent({
     /**注入column 供设置使用 */
     provide("column", columnList);
     /**注入行距 供设置使用 */
- 
     /** 监听行距变化 */
     const { spaceClass,lineSpaceChange } = useLineSpaceChange(props.lineSpace);
     provide("lineSpaceSet", { propSpace: props.lineSpace, lineSpaceChange });
@@ -168,9 +167,13 @@ export default defineComponent({
       return (
         <div
           class={
-            props.height == "100%"
-              ? "h-table isFixedHeader"
-              : `h-table ${spaceClass.value}`
+            (() => {
+              let defalutClass = `h-table ${spaceClass.value} `
+              defalutClass+=props.height == "100%"
+              ? "isFixedHeader"
+              : ''
+              return defalutClass
+            })()
           }
           ref="hTableRef"
         >

@@ -204,7 +204,7 @@ export default defineComponent({
       });
 
       return (
-        <ElRow gutter={24}>
+        <ElRow gutter={props.rowGutter}>
           {cols} {renderHandelCol()}
         </ElRow>
       );
@@ -238,12 +238,12 @@ export default defineComponent({
           class="h-queryForm__handelArea--collapse"
         >
           <span class="collapse-text">{collapsed.value ? "展开" : "收起"}</span>
-          <ElIcon
-            class="collapse-icon"
-            style={`transform: rotate(${collapsed.value ? 0 : 0.5}turn)`}
-          >
-            <ArrowDownBold></ArrowDownBold>
-          </ElIcon>
+          {collapsed.value ? (
+            <i class="collapse-icon iconfont icon-xiangxia-shuangjiantou"></i>
+          ) : (
+            <i class="collapse-icon iconfont icon-xiangshang-shuangjiantou"></i>
+          )}
+        
         </div>
       );
     }
