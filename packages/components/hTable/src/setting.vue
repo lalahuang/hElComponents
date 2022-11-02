@@ -71,15 +71,14 @@
 </template>
 
 <script setup lang="ts" name="HzmTableTool">
-import { computed, inject, PropType ,ref,watch} from "vue";
+import { computed, inject, PropType ,Ref,ref,watch} from "vue";
 import draggable from "zhyswan-vuedraggable";
 import { Setting,Download,Upload,Rank} from '@element-plus/icons-vue'
 
 import type { ITableColumns } from "./types";
-import { emitter } from "../../utils";
-const columns: ITableColumns = inject("column") ?? [];
-const columnsList=ref(columns)
-console.log('columnsList: ', columnsList.value);
+
+const columnsList: Ref<ITableColumns> = inject("column")??ref([]);
+
 const propChange = (v: boolean, index: number) => {
   console.log('v: boolean, index: number: ', v, index);
   columnsList.value[index].hide = !v;
@@ -92,9 +91,7 @@ const fixDown = (index: number) => {
   // @ts-ignore
   columnsList.value[index].fixed = columnsList.value[index].fixed == "right" ? undefined : "right";
 };
-watch(() => columnsList.value, (newValue, ) => {
-  emitter.emit("updateColumns", newValue);
-})
+
 </script>
 
 <style lang="scss">

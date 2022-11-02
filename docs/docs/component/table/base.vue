@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HTable  border :columns="columns" :data="data" >
+        <HTable  border :columns="columns" :data="data" line-space="big" >
 
         </HTable>
     </div>

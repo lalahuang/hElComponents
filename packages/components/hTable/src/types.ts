@@ -172,4 +172,6 @@ export type FixHeader = {
   scrollContainer?:string 
 }
 
+export type LineSpaceType = "default" | "middle" | "samll"
+
 

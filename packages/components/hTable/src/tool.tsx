@@ -7,14 +7,20 @@
 import { defineComponent, PropType, computed } from "vue";
 
 import setting from "./setting.vue";
+import lineSpacing from "./lineSpacing";
 import { stripEmpty } from "../../utils";
 
 export default defineComponent({
   components: {
     setting,
+    lineSpacing,
   },
   props: {
     showSettingIcon: {
+      type: Boolean,
+      default: true,
+    },
+    showLineSpaceIcon: {
       type: Boolean,
       default: true,
     },
@@ -36,7 +42,7 @@ export default defineComponent({
       console.log("handleArea: ", handleArea);
       const toolIsShow = computed(() => {
         return (
-          leftHandleArea.length || handleArea.length || props.showSettingIcon
+          leftHandleArea.length || handleArea.length || props.showSettingIcon || props.showLineSpaceIcon
         );
       });
 
@@ -48,10 +54,9 @@ export default defineComponent({
                 <el-space>{leftHandleArea}</el-space>
               </div>
               <div class="right-tool-container">
-                
-                  {handleArea}
-                  {props.showSettingIcon ? <setting></setting> : null}
-                
+                {handleArea}
+                {props.showLineSpaceIcon ? <lineSpacing></lineSpacing> : null}
+                {props.showSettingIcon ? <setting></setting> : null}
               </div>
             </div>
           ) : null}

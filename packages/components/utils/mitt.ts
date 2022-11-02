@@ -5,6 +5,13 @@
  */
 import mitt from 'mitt';
 
+const tableEvents={
+    "lineSpaceChange": "default",
+    "updateColumns":[]
+}
+const events = {
+    ...tableEvents,
 
+}
 
-export const emitter = mitt();
+export const emitter = mitt<typeof events>();

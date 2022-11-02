@@ -14,6 +14,7 @@ import {
   computed,
   onMounted,
   nextTick,
+  provide,
 } from "vue";
 
 import ToolLayout from "./tool";
@@ -29,7 +30,8 @@ import { reactivePick,reactiveOmit } from "@vueuse/core";
 import { mergeProps } from "vue";
 import { usePagination } from "./composition/usePagination";
 import useFixHeader from "./composition/useFixHeader";
-import { isDefined } from "@vueuse/core";
+import { isDefined,useVModel } from "@vueuse/core";
+import useLineSpaceChange from "./composition/useLineSpaceChange";
 export default defineComponent({
   name: "HTbale",
   props: tableProps,
@@ -37,24 +39,17 @@ export default defineComponent({
     ToolLayout,
   },
   emits: tableEmits,
-  provide() {
-    // @ts-ignore
-    return {
-      column: this.columns,
-    };
-  },
+  
   setup(props, { attrs, slots, emit }) {
     // const elTableRef = ref<ElTableType>();
     const columnList = ref(props.columns);
-    console.log("columnList: ", columnList);
-    const key = ref(0);
-    //   监听设置变化
-    emitter.on("updateColumns", (val) => {
-      console.log("val: ", val);
-      columnList.value = val as ITableColumns<any>;
-      key.value = key.value + 1;
-    });
-
+    /**注入column 供设置使用 */
+    provide("column", columnList);
+    /**注入行距 供设置使用 */
+ 
+    /** 监听行距变化 */
+    const { spaceClass,lineSpaceChange } = useLineSpaceChange(props.lineSpace);
+    provide("lineSpaceSet", { propSpace: props.lineSpace, lineSpaceChange });
     /**筛选elTable选项 */
     const tablePropsPick = reactiveOmit(
       props,
@@ -64,11 +59,18 @@ export default defineComponent({
       "fixHeader",
       "showOverflowTooltip",
       "align",
-      "headerAlign"
+      "headerAlign",
+      "lineSpace"
     );
 
     // 设置pagination props
     const paginationProps = reactivePick(props, ...paginationKeys);
+    /** toolprops */
+    const toolProps = reactivePick(
+      props,
+      "showSettingIcon",
+      "showLineSpaceIcon"
+    );
     const { currentChange, sizeChange } = usePagination(emit);
 
     return () => {
@@ -165,12 +167,18 @@ export default defineComponent({
       const columnsSlots = columnList?.value?.map(renderColumn) ?? [];
       return (
         <div
-          class={props.height == "100%" ? "h-table isFixedHeader" : "h-table"}
+          class={
+            props.height == "100%"
+              ? "h-table isFixedHeader"
+              : `h-table ${spaceClass.value}`
+          }
           ref="hTableRef"
         >
           <div class="h-table__container">
             <tool-layout
-              showSettingIcon={props.showSettingIcon}
+              {
+              ...toolProps
+              }
               v-slots={{
                 leftHandleArea: () => {
                   return slots.leftHandleArea && slots.leftHandleArea();
@@ -182,8 +190,7 @@ export default defineComponent({
             ></tool-layout>
             <div class="h-table__container--eltable">
               <el-table
-                v-loading={ props.loading }
-                key={key.value}
+                v-loading={props.loading}
                 ref="elTableRef"
                 {...mergeProps(tablePropsPick, attrs)}
                 v-slots={{

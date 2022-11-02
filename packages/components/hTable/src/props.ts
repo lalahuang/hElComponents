@@ -7,7 +7,7 @@ import { paginationProps } from "element-plus";
 import { isNumber } from "lodash";
 import type { PropType, CSSProperties } from "vue";
 import type { ComponentSize } from "element-plus";
-import { FixHeader } from './types';
+import { FixHeader, LineSpaceType } from './types';
 import type {
   TableProps,
   DefaultRow,
@@ -23,10 +23,20 @@ export const paginationKeys = Object.keys(paginationProps) as PaginationKeys;
 
 export const tableProps = {
   ...paginationProps,
+  /**行距整体 */
+  lineSpace: {
+    type: String as PropType<LineSpaceType>,
+    default: "default",
+  },
   /** loading */
   loading: {
     type: Boolean,
     default: false,
+  },
+  /**是否显示行距ICON */
+  showLineSpaceIcon: {
+    type: Boolean,
+    default: true,
   },
   /**是否显示设置 */
   showSettingIcon: {

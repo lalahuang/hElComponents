@@ -8,22 +8,24 @@
         <div>
             ceshiceshiceshiceshiceshi
         </div>
-
 <HTable :columns="columns" :data="data" :total="4" v-model:page-size="pageSize" v-model:current-page="limit"
-@load="loadData" height="100%">
+    @load="loadData" height="100%">
 </HTable>
+
        
         <!-- <el-dialog
             title="测试高度"
             v-model="diaopen"
             width="30%"
             >
-           
+        <HTable :columns="columns" :data="data" :total="4" v-model:page-size="pageSize" v-model:current-page="limit"
+            @load="loadData" height="100%">
+        </HTable>
               
             <template #footer>
-            <span>
-                <el-button type="primary" @click="">OK</el-button>
-            </span>
+                <span>
+                    <el-button type="primary" @click="">OK</el-button>
+                </span>
             </template>
         </el-dialog> -->
         
