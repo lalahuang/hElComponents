@@ -3,9 +3,8 @@
  * @Date: 2022-08-23 09:35:39
  * @Description:
  */
-import { getFirstImage } from "@/components/utils";
+import { getFirstImage, get, isArray } from "@/components/utils";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
-import { get, isArray } from "lodash";
 import { ColumnTypeOptions, columnType } from '../types';
 
 import HMoreBox from "../../../hMoreBox";

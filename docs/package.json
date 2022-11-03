@@ -9,19 +9,18 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "h-components-next": "workspace:*",
-    "@h-components/theme-chalk": "workspace:*"
+    "h-components-next": "^1.0.45"
   },
   "devDependencies": {
+    "@element-plus/icons-vue": "^2.0.6",
     "@types/node": "^18.7.13",
     "@vueuse/core": "^9.1.0",
-    "sass": "^1.54.5",
-    "vitepress": "^1.0.0-alpha.10",
-    "vue": "^3.2.37",
-    "@element-plus/icons-vue": "^2.0.6",
     "element-plus": "^2.2.14",
     "escape-html": "^1.0.3",
     "markdown-it-container": "^3.0.0",
-    "prismjs": "^1.29.0"
+    "prismjs": "^1.29.0",
+    "sass": "^1.54.5",
+    "vitepress": "^1.0.0-alpha.26",
+    "vue": "^3.2.37"
   }
 }

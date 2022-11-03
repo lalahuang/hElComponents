@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { HCopy } from 'h-components-next';
-
+import pkg from 'h-components-next';
+const { HCopy }=pkg
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@ import DefaultTheme from "vitepress/theme";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import "prismjs/themes/prism-funky.min.css";
-import "@h-components/theme-chalk/index.scss";
+import "h-components-next/dist/index.css";
 import VpDemo  from '../src/vp-demo.vue';
 import  '../theme/styles/index.scss';
 

@@ -7,7 +7,7 @@
 import { defineComponent, VNode, watch, ref, computed } from "vue";
 import { ArrowDown } from "@element-plus/icons-vue";
 import { hMoreBoxProps } from "./props";
-import { flatten } from "lodash";
+
 import {
   ElDropdownItem,
   ElDropdownMenu,
@@ -17,7 +17,7 @@ import {
   ElIcon,
 } from "element-plus";
 import useSlot from "../../composables/useSlot";
-import { stripEmpty } from "@/components/utils";
+import { flatten, stripEmpty } from "../../../components/utils";
 export default defineComponent({
   name: "HMoreBox",
   props: hMoreBoxProps,

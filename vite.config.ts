@@ -65,6 +65,7 @@ export default (): UserConfigExport => {
           "@element-plus/icons-vue",
           "@vueuse/core",
           "lodash",
+          "lodash-es",
           "mitt",
           "vue-clipboard3",
           "zhyswan-vuedraggable",
@@ -89,8 +90,8 @@ export default (): UserConfigExport => {
             exports: "named", // 导出模式 https://rollupjs.org/guide/en/#outputexports
             dir: "dist/es", // 输出路径 https://rollupjs.org/guide/en/#outputdir
             sourcemap: false, // https://rollupjs.org/guide/en/#outputsourcemap
-            entryFileNames: "index.js", // 输出后的文件名 https://rollupjs.org/guide/en/#outputentryfilenames
-            chunkFileNames: "[name].js", // 输出的 chunk文件名 https://rollupjs.org/guide/en/#outputchunkfilenames
+            entryFileNames: "index.mjs", // 输出后的文件名 https://rollupjs.org/guide/en/#outputentryfilenames
+            chunkFileNames: "[name].mjs", // 输出的 chunk文件名 https://rollupjs.org/guide/en/#outputchunkfilenames
             assetFileNames: "[name].[ext]", // 输出资产文件名 https://rollupjs.org/guide/en/#outputassetfilenames
             namespaceToStringTag: true, // https://rollupjs.org/guide/en/#outputnamespacetostringtag
             inlineDynamicImports: false, // https://rollupjs.org/guide/en/#outputinlinedynamicimports

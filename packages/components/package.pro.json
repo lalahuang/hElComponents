@@ -11,10 +11,10 @@
     "queryWapper"
   ],
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "es/index.mjs",
   "exports": {
     ".": {
-      "import": "./es/index.js",
+      "import": "./es/index.mjs",
       "require": "./lib/index.js"
     },
     "./lib": "./lib/index.js",

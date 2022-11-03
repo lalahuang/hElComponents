@@ -43,8 +43,7 @@
 </template>
 
 <script setup lang="tsx">
-import { HTable } from "h-components-next";
-import { defineTableColumns } from "h-components-next/hTable";
+import { HTable,defineTableColumns } from "h-components-next";
 
 // import { defineTableColumns } from 'element-pro-components';
 

@@ -4,7 +4,7 @@
  * @Description: 
  */
 import { paginationProps } from "element-plus";
-import { isNumber } from "lodash";
+
 import type { PropType, CSSProperties } from "vue";
 import type { ComponentSize } from "element-plus";
 import { FixHeader, LineSpaceType } from './types';
@@ -16,6 +16,7 @@ import type {
   ITableColumns,
   TableColumn,
 } from "./types";
+import { isNumber } from "@/components/utils";
 
 type PaginationKeys = Array<keyof typeof paginationProps>;
 

@@ -1,6 +1,6 @@
-import { markdownConfig } from './plugins/markdown-plugin';
+import { markdownConfig } from "./plugins/markdown-plugin";
 import { defineConfig } from "vitepress";
-import { resolve } from 'path';
+import { resolve } from "path";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 export default defineConfig({
   base: process.env.NODE_ENV === "production" ? "/vitepress-demo/" : "/",
@@ -51,9 +51,8 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [
-       vueJsx({}),
-    ],
+    
+    plugins: [vueJsx({})],
     resolve: {
       // https://cn.vitejs.dev/config/#resolve-alias
       alias: {
@@ -62,11 +61,13 @@ export default defineConfig({
         // 设置别名
         "@": resolve(__dirname, "../../../packages"),
         "@comp": resolve(__dirname, "../../../packages/components"),
+        "vue-clipboard3": resolve(
+          __dirname,
+          "../../../node_modules/vue-clipboard3/dist/esm/index"
+        ),
       },
       // https://cn.vitejs.dev/config/#resolve-extensions
       extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
     },
   },
 });
-
-

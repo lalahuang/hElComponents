@@ -25,7 +25,7 @@ import { tableProps, paginationKeys, tableEmits } from "./props";
 import { FixHeader, ITableColumns, ITableExpose, TableColumn } from "./types";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import useHeaderTootip from "./composition/useHeaderTootip";
-import { get } from "lodash";
+import { get } from "@/components/utils";
 import { reactivePick,reactiveOmit } from "@vueuse/core";
 import { mergeProps } from "vue";
 import { usePagination } from "./composition/usePagination";
