@@ -5,7 +5,7 @@
 -->
 <template>
     <div>
-        <HQueryForm  ref="formRef" :model="model" >
+        <HQueryForm  ref="formRef" :model="model"  >
             <ElFormItem label="123" prop="name">
                 <el-input placeholder="123" size="normal"  v-model="model.name"  clearable></el-input>
             </ElFormItem>

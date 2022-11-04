@@ -118,7 +118,7 @@ import headFull from './headFull.vue';
 ## 高度撑满
 
 
-你可以使用 `height='100%'` 属性来撑满表格
+你可以使用 `height='100%'` 属性来撑满表格，请保证组件元素有固定高度，并且需配置`display:flex;`
 
 :::demo table/headFull
 
@@ -131,10 +131,20 @@ import headFull from './headFull.vue';
 
 ## HTable 属性
 
-HTable 多了一个columns 配置项，其余属性与el-table 相同。
-分页属性同el-pagination 属性相同。
+HTable 属性与el-table 相同。分页属性同el-pagination 属性相同。
+
+| 参数    | 说明   | 类型                | 可选值  | 默认值  |
+| ------- | ------------ | ------- | ------ | ------- |
+| lineSpace    | 表格行距     |          -                    | "default" \ "middle" \ "samll" |-|
+| loading    | loading状态    |          -                    | false\true |false|
+| showLineSpaceIcon    | 工具栏行距按钮    |          -                    | false\true |true|
+| showSettingIcon    | 工具栏设置按钮    |          -                    | false\true |true|
+| fixHeader    | 固定头部,至少需要传入top高度已确定在合适位置固定,scrollContainer表格滚动容器，默认为 document   | `{top: number;scrollContainer?:string }`                    | -|-|
+| columns    | table-columns配置项,见下方配置   |          -                    | ITableColumns |-|
+
 
 ## Htable 事件
+支持el-table、el-pagination 所有事件
 
 | 参数    | 说明   | 类型                | 可选值  | 默认值  |
 | ------- | ------------ | ------- | ------ | ------- |

@@ -21,7 +21,11 @@ export const hQueryFormProp = {
   },
   rowGutter: {
     type: Number,
-    default:16
+    default: 16,
+  },
+  collapsed: {
+    type: Boolean,
+    default: true,
   },
 };
 

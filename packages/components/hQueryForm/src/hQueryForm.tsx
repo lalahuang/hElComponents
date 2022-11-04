@@ -32,7 +32,7 @@ export default defineComponent({
     const firstRowFull = ref(false);
     const currentSpan = ref(0);
     // 是否收起
-    const collapsed = ref(true);
+    const collapsed = ref(props.collapsed);
     const formRef = ref<FormInstance>();
     /**获取ELForm props */
     const elFormProps = reactivePick(props, ...formKeys);
