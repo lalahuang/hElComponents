@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 import { resolve } from "path";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 export default defineConfig({
-  base: process.env.NODE_ENV === "production" ? "/vitepress-demo/" : "/",
+  base: process.env.NODE_ENV === "production" ? "/" : "/",
   outDir: "../dist",
   title: "前端开发文档",
   description: "Just playing around.",
