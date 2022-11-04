@@ -45,6 +45,9 @@ import { hDictTagProps } from "./types";
 export default defineComponent({
   name: "HDictTag",
   props: hDictTagProps,
+  components: {
+    HTag
+  },
   setup: (props) => {
     const isEmpty = ref(true);
     let count = 0;
