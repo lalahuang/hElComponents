@@ -33,7 +33,8 @@
 
 <script setup lang="ts">
 
-import { HQueryForm  } from 'h-components-next';
+// import { HQueryForm } from 'h-components-next';
+import HQueryForm from '../../../../packages/components/hQueryForm';
 import { ElButton, ElFormItem, ElInput, FormInstance } from 'element-plus';
 import { ref } from 'vue';
 const formRef = ref<FormInstance>();

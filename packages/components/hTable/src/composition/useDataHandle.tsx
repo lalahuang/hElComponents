@@ -3,7 +3,8 @@
  * @Date: 2022-08-23 09:35:39
  * @Description:
  */
-import { getFirstImage, get, isArray } from "@/components/utils";
+import { getFirstImage } from "@/components/utils";
+import {  get, isArray } from "lodash-es";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import { ColumnTypeOptions, columnType } from '../types';
 

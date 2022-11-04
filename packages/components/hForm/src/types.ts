@@ -1,4 +1,4 @@
-import type { Mutable, UnknownObject } from "../../../../types/common";
+import type { Mutable, UnknownObject } from "../../../components/commonTypes";
 import type { ColProps, FormItemProps } from "element-plus";
 import { Component, ExtractPropTypes } from "vue";
 

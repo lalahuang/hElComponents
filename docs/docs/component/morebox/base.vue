@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { HMoreBox } from 'h-components-next';
+import HMoreBox from '../../../../packages/components/hMoreBox';
 
 </script>
 

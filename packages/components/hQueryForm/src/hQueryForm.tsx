@@ -4,13 +4,12 @@
  * @Description:
  */
 
-import { useResizeObserver, reactivePick } from '@vueuse/core';
+import { useResizeObserver, reactivePick } from "@vueuse/core";
 import { defineComponent, ref, VNode, mergeProps } from "vue";
-import { ElForm, ElCol, ElRow, ElIcon,ElSpace,FormInstance } from "element-plus";
-import { ArrowDownBold } from "@element-plus/icons-vue";
+import { ElForm, ElCol, ElRow, FormInstance } from "element-plus";
 
-import { hQueryFormProp, hQueryFormEmits,formKeys } from "./props";
-import { FormLayout, SpanConfig, IFormExpose } from './type';
+import { hQueryFormProp, hQueryFormEmits, formKeys } from "./props";
+import { FormLayout, SpanConfig, IFormExpose } from "./type";
 export default defineComponent({
   name: "HQueryForm",
   props: hQueryFormProp,
@@ -66,7 +65,7 @@ export default defineComponent({
       const entry = entries[0];
       const { width, height } = entry.contentRect;
       console.log("width, height: ", width, height);
-
+      //@ts-ignore
       spanInfo.value = getSpanConfig("horizontal", width);
       console.log("spanInfo.value: ", spanInfo.value);
       // key.value += 1;
@@ -77,7 +76,7 @@ export default defineComponent({
       layout: FormLayout,
       width: number,
       span?: SpanConfig
-    ): { span: number; layout: FormLayout } => {
+    ) => {
       if (span && typeof span === "number") {
         return {
           span,
@@ -87,16 +86,20 @@ export default defineComponent({
       const spanConfig = span
         ? ["xs", "sm", "md", "lg", "xl", "xxl"].map((key) => [
             CONFIG_SPAN_BREAKPOINTS[key],
+            //@ts-ignore
             24 / span[key],
             "horizontal",
           ])
-        : BREAKPOINTS[layout || "default"];
-
+        : BREAKPOINTS[layout == "horizontal" ? "default" : "vertical"];
+      
       const breakPoint = (spanConfig || BREAKPOINTS.default).find(
+        //@ts-ignore
         (item: [number, number, FormLayout]) => width < item[0] + 16
-      );
+      ); ;
       return {
+        //@ts-ignore
         span: 24 / breakPoint[1], //单个iten跨度
+        //@ts-ignore
         layout: breakPoint[2], //  label-position
       };
     };
@@ -226,24 +229,22 @@ export default defineComponent({
         </ElCol>
       );
     }
+    function onCollapse() {
+      emit("onCollapse", !collapsed.value);
+      collapsed.value = !collapsed.value;
+    }
 
     /**渲染展开伸缩按钮 */
     function renderCollapsed() {
       return (
-        <div
-          onClick={() => {
-            emit("onCollapse", !collapsed.value);
-            collapsed.value = !collapsed.value;
-          }}
-          class="h-queryForm__handelArea--collapse"
-        >
+        //@ts-ignore
+        <div onClick={onCollapse} class="h-queryForm__handelArea--collapse">
           <span class="collapse-text">{collapsed.value ? "展开" : "收起"}</span>
           {collapsed.value ? (
             <i class="collapse-icon iconfont icon-xiangxia-shuangjiantou"></i>
           ) : (
             <i class="collapse-icon iconfont icon-xiangshang-shuangjiantou"></i>
           )}
-        
         </div>
       );
     }
@@ -264,7 +265,7 @@ export default defineComponent({
         </div>
       );
     }
-    
+
     return () => {
       return (
         <>
@@ -277,7 +278,6 @@ export default defineComponent({
                     ? "top"
                     : props.labelPosition || "right",
               })}
-             
             >
               {renderELRow()}
             </ElForm>
@@ -290,7 +290,6 @@ export default defineComponent({
     this.injectTablePrimaryMethods();
   },
   methods: {
-
     /** 将elForm 暴露的方法转移到hqueryform */
     injectTablePrimaryMethods() {
       const _self = this as any;

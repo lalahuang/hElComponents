@@ -1,6 +1,6 @@
 import { FormItemProp } from "element-plus/es/components/form/src/form-item";
 import { Arrayable } from "element-plus/es/utils";
-import { ExternalParam, MaybeArray, ValidateFieldsError } from "../../../components/commonTypes";
+import { ExternalParam, ValidateFieldsError } from "../../../components/commonTypes";
 
 /*
  * @Author: hzm
@@ -17,7 +17,7 @@ export type SpanConfig =
       xl: number;
       xxl: number;
       [key: string]: number;
-    };
+    }
 export type FormLayout = "horizontal" | "vertical";
 
 

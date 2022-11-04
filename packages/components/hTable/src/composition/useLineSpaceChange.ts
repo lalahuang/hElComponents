@@ -4,9 +4,8 @@
  * @Date: 2022-11-02 08:46:26
  * @Description: 
  */
-import { onBeforeUnmount, ref,unref } from 'vue';
-import { emitter } from '../../../utils/mitt';
-import mitt from "mitt";
+import { ref } from 'vue';
+
 export default function useLineSpaceChange(lineSpaceProp:string) {
     const spaceClassList: {
         [key:string]:string

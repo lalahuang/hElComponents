@@ -18,7 +18,6 @@
       "require": "./lib/index.js"
     }
   },
-  "types": "./dist/es/index.d.ts",
   "unpkg": "dist/index.umd.js",
   "style": "dist/index.css",
   "sideEffects": [
@@ -38,7 +37,8 @@
     "build:theme": "vite build --config vite.config.theme.ts",
     "build:utils": "pnpm clean:utils && vite build --config vite.config.utils.ts && pnpm publish:utils",
     "clean:utils": "rimraf distutils",
-    "move:utils": "node script/moveutils.js"
+    "move:utils": "node script/moveutils.js",
+    "docs:dev": "pnpm run -C docs docs:dev"
   },
   "peerDependencies": {
     "@vueuse/core": "^9",

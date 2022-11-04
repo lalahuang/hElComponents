@@ -4,10 +4,8 @@
  * @Description:
  */
 
-import { defineComponent, ref, watch, inject } from "vue";
+import { defineComponent, ref, inject } from "vue";
 import { ElDropdown, ElDropdownMenu, ElDropdownItem } from "element-plus";
-import { emitter } from "../../utils";
-import Ref from "vue";
 
 export default defineComponent({
   name: "LineSpacing",

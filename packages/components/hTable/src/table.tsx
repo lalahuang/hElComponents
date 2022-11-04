@@ -7,30 +7,24 @@
 
 import {
   defineComponent,
-  App,
-  PropType,
-  createApp,
+
   ref,
-  computed,
-  onMounted,
-  nextTick,
+
   provide,
 } from "vue";
 
 import ToolLayout from "./tool";
-import DictTag from "@comp/hDictTag/src/hDictTag.vue";
-import { emitter } from "../../utils";
 import useDataHandle from "./composition/useDataHandle";
 import { tableProps, paginationKeys, tableEmits } from "./props";
-import { FixHeader, ITableColumns, ITableExpose, TableColumn } from "./types";
+import { FixHeader, ITableExpose, TableColumn } from "./types";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import useHeaderTootip from "./composition/useHeaderTootip";
-import { get } from "@/components/utils";
+import { get } from "lodash-es";
 import { reactivePick,reactiveOmit } from "@vueuse/core";
 import { mergeProps } from "vue";
 import { usePagination } from "./composition/usePagination";
 import useFixHeader from "./composition/useFixHeader";
-import { isDefined,useVModel } from "@vueuse/core";
+import { isDefined } from "@vueuse/core";
 import useLineSpaceChange from "./composition/useLineSpaceChange";
 export default defineComponent({
   name: "HTbale",

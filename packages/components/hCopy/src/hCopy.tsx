@@ -39,7 +39,7 @@ export default defineComponent({
               {copyStatus.value ? (
                 <Check class="h-copy__icon--success" />
               ) : (
-                <CopyDocument onClick={copyContext} />
+                <CopyDocument {...{ onClick: copyContext }} />
               )}
             </el-icon>
           </el-space>

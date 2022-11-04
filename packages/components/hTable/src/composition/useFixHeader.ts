@@ -5,7 +5,7 @@
  */
 import { FixHeader } from "../types";
 import { useScroll, isDefined } from '@vueuse/core';
-import { getCurrentInstance, watch, ref, Ref } from "vue";
+import { watch,  } from "vue";
 
 export default function useFixHeader(params:FixHeader,htableRef:HTMLElement) {
     const { top, scrollContainer } = params

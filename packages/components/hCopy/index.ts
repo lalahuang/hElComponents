@@ -6,8 +6,8 @@
 import hCopy from "./src/hCopy";
 
 import { withInstall } from "../utils";
+//@ts-ignore
 export const HCopy = withInstall(hCopy);
-
 export type HCopyInstance = InstanceType<typeof HCopy>;
 export default HCopy;
 export * from "./src/props";

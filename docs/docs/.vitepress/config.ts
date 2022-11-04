@@ -25,7 +25,7 @@ export default defineConfig({
     siteTitle: "HComponents文档",
     nav: [
       { text: "指南", link: "/guide/introduce" },
-      { text: "组件", link: "/component/button/" },
+      { text: "组件", link: "/component/table/" },
     ],
     sidebar: {
       "/guide/": [
@@ -51,7 +51,6 @@ export default defineConfig({
     },
   },
   vite: {
-    
     plugins: [vueJsx({})],
     resolve: {
       // https://cn.vitejs.dev/config/#resolve-alias

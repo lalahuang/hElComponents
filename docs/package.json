@@ -9,7 +9,6 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "h-components-next": "^1.0.45"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.0.6",

@@ -39,40 +39,45 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-export default defineComponent({
-  name: "HDictTag",
-});
-</script>
-
-<script setup lang="ts">
 
 import HTag from "../../hTag/index";
-import { hDictTagProps } from "./types"; 
-const props = defineProps(hDictTagProps);
-const isEmpty = ref(true);
-let count = 0;
-function checkIsInclude(value: string | number) {
+import { hDictTagProps } from "./types";
+export default defineComponent({
+  name: "HDictTag",
+  props: hDictTagProps,
+  setup: (props) => {
+    const isEmpty = ref(true);
+    let count = 0;
+    function checkIsInclude(value: string | number) {
 
-  if (values.value.includes(String(value))) {
-    
-    isEmpty.value = false;
-    return true;
-  } else {
-    count++;
-    if (count == props.options.length) {
-      count = 0;
+      if (values.value.includes(String(value))) {
+
+        isEmpty.value = false;
+        return true;
+      } else {
+        count++;
+        if (count == props.options.length) {
+          count = 0;
+        }
+        return false;
+      }
     }
-    return false;
-  }
-  
-}
 
-const values = computed(() => {
-  if (props.value !== null && typeof props.value !== "undefined") {
-    return Array.isArray(props.value) ? props.value : [String(props.value)];
-  } else {
-    isEmpty.value = true;
-    return [];
+    const values = computed(() => {
+      if (props.value !== null && typeof props.value !== "undefined") {
+        return Array.isArray(props.value) ? props.value : [String(props.value)];
+      } else {
+        isEmpty.value = true;
+        return [];
+      }
+    });
+
+    return {
+      checkIsInclude,
+      isEmpty
+    }
   }
 });
 </script>
+
+

@@ -4,7 +4,7 @@
  * @Description: 表格设置
  */
 
-import { defineComponent, PropType, computed } from "vue";
+import { defineComponent, computed } from "vue";
 
 import setting from "./setting.vue";
 import lineSpacing from "./lineSpacing";

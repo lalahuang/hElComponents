@@ -16,7 +16,7 @@ import type {
   ITableColumns,
   TableColumn,
 } from "./types";
-import { isNumber } from "@/components/utils";
+import { isNumber } from "lodash-es";
 
 type PaginationKeys = Array<keyof typeof paginationProps>;
 

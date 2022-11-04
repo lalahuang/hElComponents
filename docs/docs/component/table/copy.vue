@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="tsx">
-import { HTable, defineTableColumns } from "h-components-next";
+import HTable, { defineTableColumns } from '../../../../packages/components/hTable';
 
 interface DataType {
     date: string,

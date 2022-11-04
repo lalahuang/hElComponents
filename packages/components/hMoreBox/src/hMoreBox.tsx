@@ -4,8 +4,7 @@
  * @Description:
  */
 
-import { defineComponent, VNode, watch, ref, computed } from "vue";
-import { ArrowDown } from "@element-plus/icons-vue";
+import { defineComponent, VNode, } from "vue";
 import { hMoreBoxProps } from "./props";
 
 import {
@@ -13,11 +12,11 @@ import {
   ElDropdownMenu,
   ElDropdown,
   ElSpace,
-  ElLink,
-  ElIcon,
+
 } from "element-plus";
-import useSlot from "../../composables/useSlot";
-import { flatten, stripEmpty } from "../../../components/utils";
+
+import { stripEmpty } from "../../../components/utils";
+import { flatten } from "lodash-es";
 export default defineComponent({
   name: "HMoreBox",
   props: hMoreBoxProps,
@@ -75,8 +74,9 @@ export default defineComponent({
       return stripEmpty(
         flatten(
           vslots?.map?.((vnode) => {
-            return vnode.type.toString() == "Symbol(Fragment)" &&
-              vnode?.children?.length
+            return vnode.type.toString() == "Symbol(Fragment)" ||
+              //修复正式环境Symbol()的情况
+              (vnode.type.toString() == "Symbol()" && vnode?.children?.length)
               ? vnode.children
               : vnode;
           }) ?? []

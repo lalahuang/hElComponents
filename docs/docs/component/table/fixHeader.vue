@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="tsx">
-import { HTable, defineTableColumns } from "h-components-next";
+import HTable, { defineTableColumns } from '../../../../packages/components/hTable';
 import { FixHeader } from '../../../../packages/components/hTable/src/types';
 
 interface DataType {
