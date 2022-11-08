@@ -5,8 +5,8 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 export default defineConfig({
   base: process.env.NODE_ENV === "production" ? "/" : "/",
   outDir: "../dist",
-  title: "前端开发文档",
-  description: "Just playing around.",
+  title: "HElComponentsNext开发文档",
+  description: "HElComponentsNext",
   markdown: {
     config: markdownConfig,
   },
@@ -33,7 +33,7 @@ export default defineConfig({
           text: "指南",
           items: [
             { text: "介绍", link: "/guide/introduce" },
-            { text: "安装", link: "/guide/develop" },
+            { text: "安装与使用", link: "/guide/develop" },
           ],
         },
       ],

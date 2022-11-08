@@ -1,32 +1,42 @@
 
-# 环境准备
 
-## 管理多个Node版本
 
-:::tip
-如何管理多个Node版本？
-* [mac](https://github.com/tj/n)
-* [windows](https://github.com/coreybutler/nvm-windows/releases)
-:::
+## 安装
 
-## 安装node
-- mac 用 `n`
-```
-# 安装
-n install [版本号]
-```
-- windows 用 `nvm`
-```
-#安装
-nvm install [版本号]
-# 使用
-nvm use [版本号]
-``` 
+`pnpm  install h-components-next`
 
-## 安装yarn
+## 快速开始
+
+
+### 完整引入
+
+由于 `h-components-next` 依赖于 `element-plus`,需要提前引入`element-plus`
+```js
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import HComponentsNext from 'h-components-next'
+import 'element-plus/dist/index.css'
+import 'h-components-next/dist/index.css'
+
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.use(ElementPlus).use(HComponentsNext)
+app.mount('#app')
 ```
-# 全局安装
-npm install -g yarn
-# 设置成淘宝镜像
-yarn config set registry http://registry.npm.taobao.org/
+
+### 按需引入
+
+```vue
+<template>
+  <h-table>I am HTable</h-table>
+</template>
+<script >
+  import { HTtable } from 'h-components-next'
+  import  'h-components-next/theme/hTable.css'
+  export default {
+    components: { HTtable },
+  }
+</script>
 ```

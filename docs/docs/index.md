@@ -1,6 +1,5 @@
 ---
-layout: home
-title: H-el-components-next
+title: H-Components-Next
 ---
 
 <Home />

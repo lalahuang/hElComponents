@@ -15,26 +15,14 @@
     <div id="title">
       <!--  -->
       <h1 class="title">
-      🌈 HElComponentsNext
+      🌈 HComponentsNext
         
       </h1>
 
       <h1 class="subtitle">
         基于Element-plus再封装的业务组件库
       </h1>
-      <!-- <p class="content">
-        <strong>🌈 HElComponentsNext</strong>
-        是一个基于 element-plus 开发的一个适用于中后台快速开发的一套业务组件库。主要解决多项目公共组件的协同开发。
-      </p>
-
-      <el-button
-        class="start-btn"
-        type="primary"
-        size="large"
-        
-      >
-        开始使用
-      </el-button> -->
+     
     </div>
 
   </div>
