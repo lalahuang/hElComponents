@@ -38,7 +38,8 @@
     "build:utils": "pnpm clean:utils && vite build --config vite.config.utils.ts && pnpm publish:utils",
     "clean:utils": "rimraf distutils",
     "move:utils": "node script/moveutils.js",
-    "docs:dev": "pnpm run -C docs docs:dev"
+    "docs:dev": "pnpm run -C docs docs:dev",
+    "docs:build": "pnpm run -C docs docs:build"
   },
   "peerDependencies": {
     "@vueuse/core": "^9",
