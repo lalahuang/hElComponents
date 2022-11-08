@@ -53,7 +53,7 @@ export default defineComponent({
     let count = 0;
     function checkIsInclude(value: string | number) {
 
-      if (values.value.includes(String(value))) {
+      if (values.value.includes((Array.isArray(props.value) ? value : String(value)))) {
 
         isEmpty.value = false;
         return true;

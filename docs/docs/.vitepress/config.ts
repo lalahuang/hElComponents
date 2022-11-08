@@ -46,6 +46,7 @@ export default defineConfig({
             { text: "更多", link: "/component/morebox/" },
             { text: "复制", link: "/component/copy/" },
             { text: "tag", link: "/component/tag/" },
+            { text: "字典", link: "/component/dictTag/" },
           ],
         },
       ],
